@@ -1,0 +1,95 @@
+USERS
+Admin (admin, cadastrar all documents)
+User  (api de empregados nome e perfil, senha randomica padrao)
+
+EMPREGADO
+Matricula
+Nome
+Perfil
+Departamento
+
+
+DOCUMENTO
+id
+cod_categoria
+
+LOCALIZACAO
+endereco
+predio
+sala
+caixa
+pasta
+
+
+CATEGORIA
+contrato
+financeira
+licitacao
+p.funcionais
+outros assuntos
+
+CONTRATO
+Doc.Encaminhamento
+Unidade Produtora [sigla dep]*
+Numero caixa escritorio de origem
+Numero caixa no arquivo de custodia
+Codigo classificacao documental [codigo]*
+Data Limite*
+Nro contrato*
+Nro PEC*
+Empresa contratada*
+Objeto resumido (descricao)*
+Localizacao*
+
+
+FINANCEIRA
+Doc.Encaminhamento
+Unidade Produtora [sigla dep]*                  <---
+Numero caixa escritorio de origem
+Numero caixa no arquivo de custodia
+Codigo classificacao documental [codigo]*       <---
+Data Limite*                                    <---
+Data Pagamento*
+Unidade de Pagamento*
+Localizacao*                                    <---
+
+LICITACAO
+Doc.Encaminhamento
+Unidade Produtora [sigla dep]*
+Numero caixa escritorio de origem
+Numero caixa no arquivo de custodia
+Codigo classificacao documental [codigo]*
+Data Limite*
+Numero processo licitatorio*
+Nro PEC*
+Objeto resumido (descricao)*
+Localizacao*
+
+PASTAS FUNCIONAIS
+Doc.Encaminhamento
+Unidade Produtora [sigla dep]*
+Numero caixa escritorio de origem
+Numero caixa no arquivo de custodia
+Codigo classificacao documental [codigo]*
+Data Limite*
+Nome completo do empregado (sem abreviacoes) <-- api
+Localizacao*
+
+
+
+UNIDADE PRODUTORA
+[sigla dep][long dep]
+
+
+Codigos classificacao documental
+[codigo][descricao]
+
+
+BUSCAR
+Campos obrigatorios
+
+RELATORIOS
+Gerar etiqueta novos documentos
+Caixas por unidade
+Caixas por predio
+Agrupado por classe de documento
