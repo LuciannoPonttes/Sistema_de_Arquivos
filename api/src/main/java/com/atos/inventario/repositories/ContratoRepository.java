@@ -1,5 +1,8 @@
 package com.atos.inventario.repositories;
 
-public interface ContratoRepository {
+import com.atos.inventario.model.Contrato;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ContratoRepository  extends JpaRepository<Contrato, Long> {
 
 }
