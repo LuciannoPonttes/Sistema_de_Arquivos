@@ -7,5 +7,4 @@ import com.atos.inventario.model.Contrato;
 public interface ContratoRepository extends JpaRepository<Contrato, Long> {
 
 	Contrato findById(long id);
-
 }
