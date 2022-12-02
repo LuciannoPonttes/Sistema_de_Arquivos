@@ -26,27 +26,30 @@ public class ContratoController {
 	ContratoRepository contratoRepository;
 
 	@GetMapping("/contratos")
-	public List<Contrato> listarContrato() {
+	public ResponseEntity<List<Contrato>> listarContrato() {
 
 		List<Contrato> contratos = contratoRepository.findAll();
-		return contratos;
+
+		return ResponseEntity.ok(contratos);
 	}
 
 	@PostMapping("/cadastrarContrato")
-	public void cadastrarContrato(@RequestBody Contrato contrato) {
+	public ResponseEntity<Contrato> cadastrarContrato(@RequestBody Contrato contrato) {
 
-		contratoRepository.save(contrato);
+		Contrato contratoRetorno = contratoRepository.save(contrato);
+
+		return ResponseEntity.ok(contratoRetorno);
 	}
 
 	@GetMapping(value = "/contrato/{id}")
-	public Contrato buscarContrato(@PathVariable long id) {
+	public ResponseEntity<Contrato> buscarContrato(@PathVariable long id) {
 
 		Contrato contrato = contratoRepository.findById(id);
 
-		return contrato;
+		return ResponseEntity.ok(contrato);
 	}
 
-	@DeleteMapping(value = "/contratoDelete/{id}")
+	@DeleteMapping(value = "/contrato/{id}")
 	public ResponseEntity<Void> deletarContrato(@PathVariable long id) {
 
 		Contrato contrato = contratoRepository.findById(id);
@@ -56,10 +59,12 @@ public class ContratoController {
 
 	}
 
-	@PutMapping("/editarContrato")
-	public void editarContrato(@RequestBody Contrato contrato) {
+	@PutMapping(value = "/contrato/{id}")
+	public ResponseEntity<Contrato> editarContrato(@RequestBody Contrato contrato) {
 
-		contratoRepository.save(contrato);
+		Contrato contratoRetorno = contratoRepository.save(contrato);
+
+		return ResponseEntity.ok(contratoRetorno);
 	}
 
 }

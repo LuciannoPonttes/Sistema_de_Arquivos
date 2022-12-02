@@ -26,27 +26,30 @@ public class LicitacaoController {
 	LicitacaoRepository licitacaoRepository;
 
 	@GetMapping("/licitacoes")
-	public List<Licitacao> listarLicitacao() {
+	public ResponseEntity<List<Licitacao>> listarLicitacao() {
 
 		List<Licitacao> licitacoes = licitacaoRepository.findAll();
-		return licitacoes;
+
+		return ResponseEntity.ok(licitacoes);
 	}
 
 	@PostMapping("/cadastrarLicitacao")
-	public void cadastrarLicitacao(@RequestBody Licitacao licitacao) {
+	public ResponseEntity<Licitacao> cadastrarLicitacao(@RequestBody Licitacao licitacao) {
 
-		licitacaoRepository.save(licitacao);
+		Licitacao licitacaoRetorno = licitacaoRepository.save(licitacao);
+
+		return ResponseEntity.ok(licitacaoRetorno);
 	}
 
 	@GetMapping(value = "/licitacao/{id}")
-	public Licitacao buscarLicitacao(@PathVariable long id) {
+	public ResponseEntity<Licitacao> buscarLicitacao(@PathVariable long id) {
 
 		Licitacao licitacao = licitacaoRepository.findById(id);
 
-		return licitacao;
+		return ResponseEntity.ok(licitacao);
 	}
 
-	@DeleteMapping(value = "/licitacaoDelete/{id}")
+	@DeleteMapping(value = "/licitacao/{id}")
 	public ResponseEntity<Void> deletarLicitacao(@PathVariable long id) {
 
 		Licitacao licitacao = licitacaoRepository.findById(id);
@@ -56,10 +59,12 @@ public class LicitacaoController {
 
 	}
 
-	@PutMapping("/editarLicitacao")
-	public void editarLicitacao(@RequestBody Licitacao licitacao) {
+	@PutMapping(value = "/licitacao/{id}")
+	public ResponseEntity<Licitacao> editarLicitacao(@RequestBody Licitacao licitacao) {
 
-		licitacaoRepository.save(licitacao);
+		Licitacao licitacaoRetorno = licitacaoRepository.save(licitacao);
+
+		return ResponseEntity.ok(licitacaoRetorno);
 	}
 
 }

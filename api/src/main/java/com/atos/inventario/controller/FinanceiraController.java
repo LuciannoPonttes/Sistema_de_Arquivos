@@ -26,27 +26,30 @@ public class FinanceiraController {
 	FinanceiraRepository financeiraRepository;
 
 	@GetMapping("/financeiras")
-	public List<Financeira> listarFinanceira() {
+	public ResponseEntity<List<Financeira>> listarFinanceira() {
 
 		List<Financeira> financeiras = financeiraRepository.findAll();
-		return financeiras;
+
+		return ResponseEntity.ok(financeiras);
 	}
 
 	@PostMapping("/cadastrarFinanceira")
-	public void cadastrarFinanceira(@RequestBody Financeira financeira) {
+	public ResponseEntity<Financeira> cadastrarFinanceira(@RequestBody Financeira financeira) {
 
-		financeiraRepository.save(financeira);
+		Financeira financeiraRetorno = financeiraRepository.save(financeira);
+
+		return ResponseEntity.ok(financeiraRetorno);
 	}
 
 	@GetMapping(value = "/financeira/{id}")
-	public Financeira buscarFinanceira(@PathVariable long id) {
+	public ResponseEntity<Financeira> buscarFinanceira(@PathVariable long id) {
 
 		Financeira financeira = financeiraRepository.findById(id);
 
-		return financeira;
+		return ResponseEntity.ok(financeira);
 	}
 
-	@DeleteMapping(value = "/financeiraDelete/{id}")
+	@DeleteMapping(value = "/financeira/{id}")
 	public ResponseEntity<Void> deletarFinanceira(@PathVariable long id) {
 
 		Financeira financeira = financeiraRepository.findById(id);
@@ -56,10 +59,12 @@ public class FinanceiraController {
 
 	}
 
-	@PutMapping("/editarFinanceira")
-	public void editarFinanceira(@RequestBody Financeira financeira) {
+	@PutMapping(value = "/financeira/{id}")
+	public ResponseEntity<Financeira> editarFinanceira(@RequestBody Financeira financeira) {
 
-		financeiraRepository.save(financeira);
+		Financeira financeiraRetorno = financeiraRepository.save(financeira);
+
+		return ResponseEntity.ok(financeiraRetorno);
 	}
 
 }
