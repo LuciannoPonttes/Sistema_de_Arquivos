@@ -33,4 +33,12 @@ public class OutrosController {
 
         return ResponseEntity.ok(contratos);
     }
+
+    @DeleteMapping()
+    // TODO esta usando "Contrato"  enquanto não tem a model dele
+    public ResponseEntity<Void> delete(long id) {
+        contratoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
