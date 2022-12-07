@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_ROLES_EMPREGADO")
 public class RoleEmpregado implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -35,7 +36,4 @@ public class RoleEmpregado implements Serializable {
 		this.nomeRole = nomeRole;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 }

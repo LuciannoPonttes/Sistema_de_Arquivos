@@ -14,18 +14,12 @@ public class Licitacao extends Documento implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
 	private String documentoEncaminhamento;
 	private String numeroCaixaEscritorioOrigem;
 	private String numeroCaixaArquivoCustodia;
 	private String numeroProcessoLicitatorio;
 	private String numeroPec;
 	private String objetoResumido;
-	
-
 	
 	public String getNumeroProcessoLicitatorio() {
 		return numeroProcessoLicitatorio;
@@ -53,14 +47,6 @@ public class Licitacao extends Documento implements Serializable{
 
 	public String getDocumentoEncaminhamento() {
 		return documentoEncaminhamento;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public void setDocumentoEncaminhamento(String documentoEncaminhamento) {
