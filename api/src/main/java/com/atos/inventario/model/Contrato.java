@@ -15,10 +15,6 @@ import javax.persistence.Table;
 public class Contrato extends Documento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idArquivoContrato;
-	
 	private String documentoEncaminhamento;
 	private String numeroCaixaEscritorioOrigem;
 	private String numeroCaixaArquivoCustodia;
@@ -27,12 +23,6 @@ public class Contrato extends Documento implements Serializable {
 	private String empresaContratada;
 	private String objetoResumido;
 	
-	public long getIdArquivoContrato() {
-		return idArquivoContrato;
-	}
-	public void setIdArquivoContrato(long idArquivoContrato) {
-		this.idArquivoContrato = idArquivoContrato;
-	}
 	public String getDocumentoEncaminhamento() {
 		return documentoEncaminhamento;
 	}

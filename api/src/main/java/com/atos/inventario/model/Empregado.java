@@ -4,17 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TB_EMPREGADO")
@@ -24,7 +14,7 @@ public class Empregado implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idAEmpregado;
+	private long idEmpregado;
 	
 	private String matricula;
 	private String nome;
@@ -33,16 +23,16 @@ public class Empregado implements Serializable {
 	private String departamento;
 	@ManyToMany
 	@JoinTable(name = "TB_ROLES_EMPREGADO",
-		joinColumns = @JoinColumn(name = "idAEmpregado"),
+		joinColumns = @JoinColumn(name = "idEmpregado"),
 		inverseJoinColumns = @JoinColumn(name = "roleId"))
 	private List<RoleEmpregado> roles;
 
 	
 	public long getIdAEmpregado() {
-		return idAEmpregado;
+		return idEmpregado;
 	}
-	public void setIdAEmpregado(long idAEmpregado) {
-		this.idAEmpregado = idAEmpregado;
+	public void setIdAEmpregado(long idEmpregado) {
+		this.idEmpregado = idEmpregado;
 	}
 	public String getMatricula() {
 		return matricula;
