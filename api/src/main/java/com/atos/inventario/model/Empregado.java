@@ -13,7 +13,7 @@ public class Empregado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idEmpregado;
 	
 	private String matricula;
@@ -52,9 +52,7 @@ public class Empregado implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+
 	public List<RoleEmpregado> getRoles() {
 		return roles;
 	}
