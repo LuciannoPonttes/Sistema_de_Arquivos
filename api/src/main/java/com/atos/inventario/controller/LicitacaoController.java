@@ -45,8 +45,11 @@ public class LicitacaoController {
 	public ResponseEntity<Licitacao> buscarLicitacao(@PathVariable long id) {
 
 		Licitacao licitacao = licitacaoRepository.findById(id);
-
-		return ResponseEntity.ok(licitacao);
+		if (licitacao != null) {
+			return ResponseEntity.ok(licitacao);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@DeleteMapping(value = "/licitacao/{id}")

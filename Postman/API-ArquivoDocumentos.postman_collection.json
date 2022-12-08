@@ -1,0 +1,515 @@
+{
+	"info": {
+		"_postman_id": "e21aee95-f31e-4337-acbc-bf61c0e349f1",
+		"name": "API-ArquivoDocumentos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Contrato",
+			"item": [
+				{
+					"name": "Consulta Lista Contratos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/contratos",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contratos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salva Contrato",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"unidadeProdutora\": { \r\n        \"sigla\":\"RECFED\"\r\n    },\r\n    \"classificacaoDocumental\": {\r\n        \"classificacaoDocumental\":\"Contrato2022\",\r\n        \"descricao\":\"Contrato Tijolos MCMV\"\r\n    },\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregado\": {\r\n        \"matricula\":\"USR1001\",\r\n        \"nome\":\"PEDRO PEREZ\"\r\n    },\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"BLOCO A\",\r\n        \"sala\":\"301\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/cadastrarContrato",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cadastrarContrato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta Contrato por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/contrato/1",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contrato",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Contrato por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/contrato/1",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contrato",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Licitacao",
+			"item": [
+				{
+					"name": "Consulta Lista Licitacoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/licitacoes",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"licitacoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salva Licitacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"unidadeProdutora\": { \r\n        \"sigla\":\"RECFED\"\r\n    },\r\n    \"classificacaoDocumental\": {\r\n        \"classificacaoDocumental\":\"Contrato2022\",\r\n        \"descricao\":\"Contrato Tijolos MCMV\"\r\n    },\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregado\": {\r\n        \"matricula\":\"USR1001\",\r\n        \"nome\":\"PEDRO PEREZ\"\r\n    },\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"BLOCO A\",\r\n        \"sala\":\"301\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"LI-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"numeroProcessoLicitatorio\":\"PLIC.4567\",\r\n    \"objetoResumido\":\"LICITACAO OBRA PONTE MARECHAL PINZON\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/cadastrarLicitacao",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cadastrarLicitacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta Licitacao por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/licitacao/1",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"licitacao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Licitacao por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/licitacao/1",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"licitacao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Financeira",
+			"item": [
+				{
+					"name": "Consulta Lista Financeira",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/financeiras",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"financeiras"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salva Financeira",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"unidadeProdutora\": { \r\n        \"sigla\":\"RECFED\"\r\n    },\r\n    \"classificacaoDocumental\": {\r\n        \"classificacaoDocumental\":\"Contrato2022\",\r\n        \"descricao\":\"Contrato Tijolos MCMV\"\r\n    },\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregado\": {\r\n        \"matricula\":\"USR1001\",\r\n        \"nome\":\"PEDRO PEREZ\"\r\n    },\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"BLOCO A\",\r\n        \"sala\":\"301\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\",\r\n    \"dataPagamento\": \"2022-12-06\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/cadastrarFinanceira",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cadastrarFinanceira"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta Financeira por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/financeira/9",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"financeira",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Financeira por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/financeira/9",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"financeira",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PastaFuncional",
+			"item": [
+				{
+					"name": "Consulta Lista Pasta Funcional",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/pastas",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pastas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salva Pasta Funcional",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"unidadeProdutora\": { \r\n        \"sigla\":\"RECFED\"\r\n    },\r\n    \"classificacaoDocumental\": {\r\n        \"classificacaoDocumental\":\"Contrato2022\",\r\n        \"descricao\":\"Contrato Tijolos MCMV\"\r\n    },\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregado\": {\r\n        \"matricula\":\"USR1001\",\r\n        \"nome\":\"PEDRO PEREZ\"\r\n    },\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"BLOCO A\",\r\n        \"sala\":\"301\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/cadastrarPasta",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cadastrarPasta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta Pasta por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/pasta/1",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pasta",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Pasta por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/pasta/1",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pasta",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OutroDocumento",
+			"item": [
+				{
+					"name": "Consulta Lista OutrosDoc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/outros",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"outros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salva OutroDoc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"unidadeProdutora\": { \r\n        \"sigla\":\"RECFED\"\r\n    },\r\n    \"classificacaoDocumental\": {\r\n        \"classificacaoDocumental\":\"Contrato2022\",\r\n        \"descricao\":\"Contrato Tijolos MCMV\"\r\n    },\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregado\": {\r\n        \"matricula\":\"USR1001\",\r\n        \"nome\":\"PEDRO PEREZ\"\r\n    },\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"BLOCO A\",\r\n        \"sala\":\"301\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/cadastrarOutro",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cadastrarOutro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consulta OutroDoc por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/outro/1",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"outro",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta OutroDoc por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/outro/1",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"outro",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "localhost"
+		}
+	]
+}

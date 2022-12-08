@@ -45,8 +45,11 @@ public class FinanceiraController {
 	public ResponseEntity<Financeira> buscarFinanceira(@PathVariable long id) {
 
 		Financeira financeira = financeiraRepository.findById(id);
-
-		return ResponseEntity.ok(financeira);
+		if (financeira != null) {
+			return ResponseEntity.ok(financeira);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@DeleteMapping(value = "/financeira/{id}")

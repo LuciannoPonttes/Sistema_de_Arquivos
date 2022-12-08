@@ -3,6 +3,8 @@ package com.atos.inventario.controller;
 
 import com.atos.inventario.model.PastaFuncional;
 import com.atos.inventario.repositories.PastaFuncionalRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,18 +12,20 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "pastas-funcionais")
+@RequestMapping(path = "/api")
+@CrossOrigin
 public class PastaFuncionalController {
 
+	@Autowired
     private PastaFuncionalRepository pastaFuncionalRepository;
 
-    @PostMapping()
+    @PostMapping(value = "/cadastrarPasta")
     public ResponseEntity<PastaFuncional> save(@RequestBody PastaFuncional toSave) {
         return ResponseEntity.ok(pastaFuncionalRepository.save(toSave));
     }
 
-    @PostMapping(value = "/list")
-    public ResponseEntity<List<PastaFuncional>> list(@RequestBody Map<String, String> filtro) {
+    @GetMapping(value = "/pastas")
+    public ResponseEntity<List<PastaFuncional>> list(@RequestBody(required=false) Map<String, String> filtro) {
         // TODO organizar os filtros
         /*
             .stream()
@@ -32,9 +36,25 @@ public class PastaFuncionalController {
 
         return ResponseEntity.ok(pastasFuncionais);
     }
+    
+    @PostMapping(value="/cadastrapasta")
+    public ResponseEntity<PastaFuncional> cadastrar(@RequestBody PastaFuncional pastaFuncional){
+    	PastaFuncional pasta = pastaFuncionalRepository.save(pastaFuncional);
+    	return ResponseEntity.ok(pasta);
+    }
+    
+    @GetMapping(value= "/pasta/{id}")
+    public ResponseEntity<PastaFuncional> getById(@PathVariable long id){
+    	PastaFuncional result = pastaFuncionalRepository.findById(id);
+    	if (result != null) {
+    		return ResponseEntity.ok(result);
+    	} else {
+    		return ResponseEntity.notFound().build();
+    	}
+    }
 
-    @DeleteMapping()
-    public ResponseEntity<Void> delete(long id) {
+    @DeleteMapping(value="/pasta/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id) {
         pastaFuncionalRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

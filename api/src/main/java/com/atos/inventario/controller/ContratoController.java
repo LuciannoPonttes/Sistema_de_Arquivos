@@ -45,8 +45,11 @@ public class ContratoController {
 	public ResponseEntity<Contrato> buscarContrato(@PathVariable long id) {
 
 		Contrato contrato = contratoRepository.findById(id);
-
-		return ResponseEntity.ok(contrato);
+		if (contrato != null) {
+			return ResponseEntity.ok(contrato);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@DeleteMapping(value = "/contrato/{id}")
