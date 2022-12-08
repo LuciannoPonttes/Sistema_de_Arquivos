@@ -1,6 +1,8 @@
 package com.atos.inventario.controller;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,36 @@ public class LicitacaoController {
 
 	@GetMapping("/licitacoes")
 	public ResponseEntity<List<Licitacao>> listarLicitacao() {
+//	public ResponseEntity<List<Licitacao>> listarLicitacao(@RequestBody Map<String, String> filtro) {
 
+		// TODO organizar os filtros
+		/* 
+		 * Licitacao.documentoEncaminhamento 
+		 * Licitacao.unidadeProdutora
+		 * Licitacao.numeroCaixaEscritorioOrigem
+		 * Licitacao.numeroCaixaArquivoCustodia
+		 * Licitacao.classificacaoDocumental
+		 * Licitacao.dataLimite
+ 		 * Licitacao.numeroProcessoLicitatorio
+ 		 * Licitacao.numeroPec
+		 * Licitacao.objetoResumido
+		 * Licitacao.localizacao
+		 * 
+		 * */
+		
+//		List<Licitacao> licitacoes = licitacaoRepository.findAll().stream()
+//		.filter(l -> l.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
+//				&& l.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
+//				&& l.getNumeroCaixaEscritorioOrigem().equals(filtro.get("numeroCaixaEscritorioOrigem"))
+//				&& l.getNumeroCaixaArquivoCustodia().equals(filtro.get("numeroCaixaArquivoCustodia"))
+//				&& l.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer.parseInt(filtro.get("codigoClassificacaoDocumental"))
+//				&& l.getDataLimite().equals(new Date(filtro.get("dataLimite")))
+//				&& l.getNumeroProcessoLicitatorio().equals(filtro.get("numeroProcessoLicitatorio"))
+//				&& l.getNumeroPec().equals(filtro.get("numeroPec"))
+//				&& l.getObjetoResumido().equals(filtro.get("objetoResumido"))
+//				&& l.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
+//		.collect(Collectors.toList());
+		
 		List<Licitacao> licitacoes = licitacaoRepository.findAll();
 
 		return ResponseEntity.ok(licitacoes);

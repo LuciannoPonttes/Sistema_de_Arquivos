@@ -1,6 +1,9 @@
 package com.atos.inventario.controller;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +30,35 @@ public class ContratoController {
 
 	@GetMapping("/contratos")
 	public ResponseEntity<List<Contrato>> listarContrato() {
+//	public ResponseEntity<List<Contrato>> listarContrato(@RequestBody Map<String, String> filtro) {
+		
+		// TODO organizar os filtros
+		/* 
+		 * Contrato.idArquivoContrato 
+		 * Contrato.unidadeProdutora
+		 * Contrato.classificacaoDocumental
+		 * Contrato.dataLimite
+		 * Contrato.numeroPec
+		 * Contrato.empresaContratada
+		 * Contrato.objetoResumido
+		 * Contrato.localizacao
+		 * Empregado.departamento
+		 * 
+		 * */
+
+//		List<Contrato> contratos = contratoRepository.findAll().stream()
+//				.filter(c -> c.getIdArquivoContrato() == Long.parseLong(filtro.get("idArquivoContrato"))
+//						&& c.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
+//						&& c.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer.parseInt(filtro.get("codigoClassificacaoDocumental"))
+//						&& c.getDataLimite().equals(new Date(filtro.get("dataLimite")))
+//						&& c.getNumeroPec().equals(filtro.get("numeroPec"))
+//						&& c.getEmpresaContratada().equals(filtro.get("empresaContratada"))
+//						&& c.getObjetoResumido().equals(filtro.get("objetoResumido"))
+//						&& c.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
+//				.collect(Collectors.toList());
 
 		List<Contrato> contratos = contratoRepository.findAll();
-
+		
 		return ResponseEntity.ok(contratos);
 	}
 
