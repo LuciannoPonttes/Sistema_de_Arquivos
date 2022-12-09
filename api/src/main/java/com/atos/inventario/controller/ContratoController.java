@@ -29,15 +29,15 @@ public class ContratoController {
 	ContratoRepository contratoRepository;
 
 	@GetMapping("/contratos")
-	public ResponseEntity<List<Contrato>> listarContrato() {
-//	public ResponseEntity<List<Contrato>> listarContrato(@RequestBody Map<String, String> filtro) {
+	public ResponseEntity<List<Contrato>> listarContrato(@RequestBody(required=false) Map<String, String> filtro) {
 		
 		// TODO organizar os filtros
 		/* 
-		 * Contrato.idArquivoContrato 
+		 * Contrato.documentoEncaminhamento 
 		 * Contrato.unidadeProdutora
 		 * Contrato.classificacaoDocumental
 		 * Contrato.dataLimite
+		 * Contrato.numeroContrato
 		 * Contrato.numeroPec
 		 * Contrato.empresaContratada
 		 * Contrato.objetoResumido
@@ -47,10 +47,12 @@ public class ContratoController {
 		 * */
 
 //		List<Contrato> contratos = contratoRepository.findAll().stream()
-//				.filter(c -> c.getIdArquivoContrato() == Long.parseLong(filtro.get("idArquivoContrato"))
+//				.filter(c -> c.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
 //						&& c.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
-//						&& c.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer.parseInt(filtro.get("codigoClassificacaoDocumental"))
+//						&& c.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer
+//								.parseInt(filtro.get("codigoClassificacaoDocumental"))
 //						&& c.getDataLimite().equals(new Date(filtro.get("dataLimite")))
+//						&& c.getNumeroContrato().equals(filtro.get("numeroContrato"))
 //						&& c.getNumeroPec().equals(filtro.get("numeroPec"))
 //						&& c.getEmpresaContratada().equals(filtro.get("empresaContratada"))
 //						&& c.getObjetoResumido().equals(filtro.get("objetoResumido"))

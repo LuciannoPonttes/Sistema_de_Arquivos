@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -26,12 +28,29 @@ public class OutroDocumentoController {
 
     @GetMapping(value = "/outros")
     public ResponseEntity<List<OutroDocumento>> list(@RequestBody(required=false) Map<String, String> filtro) {
-        // TODO organizar os filtros
-        /*
-            .stream()
-            .filter(c -> c.getPoints() > 100 && c.getName().startsWith("Charles"))
-            .collect(Collectors.toList())
-        * */
+
+		// TODO organizar os filtros
+		/* 
+		 * OutroDocumento.documentoEncaminhamento 
+		 * OutroDocumento.unidadeProdutora
+		 * OutroDocumento.classificacaoDocumental
+		 * OutroDocumento.dataLimite
+		 * OutroDocumento.objetoResumido
+		 * OutroDocumento.localizacao
+		 * Empregado.departamento
+		 * 
+		 * */
+		
+//		List<OutroDocumento> outrosDocumentos = outroDocumentoRepository.findAll().stream()
+//				.filter(o -> o.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
+//						&& o.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
+//						&& o.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer
+//								.parseInt(filtro.get("codigoClassificacaoDocumental"))
+//						&& o.getDataLimite().equals(new Date(filtro.get("dataLimite")))
+//						&& o.getObjetoResumido().equals(filtro.get("objetoResumido"))
+//						&& o.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
+//				.collect(Collectors.toList());
+    	
         List<OutroDocumento> outrosDocumentos = outroDocumentoRepository.findAll();
         return ResponseEntity.ok(outrosDocumentos);
     }
