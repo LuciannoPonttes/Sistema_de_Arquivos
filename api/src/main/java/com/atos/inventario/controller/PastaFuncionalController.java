@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -26,12 +28,29 @@ public class PastaFuncionalController {
 
     @GetMapping(value = "/pastas")
     public ResponseEntity<List<PastaFuncional>> list(@RequestBody(required=false) Map<String, String> filtro) {
-        // TODO organizar os filtros
-        /*
-            .stream()
-            .filter(c -> c.getPoints() > 100 && c.getName().startsWith("Charles"))
-            .collect(Collectors.toList())
-        * */
+
+		// TODO organizar os filtros
+		/* 
+		 * PastaFuncional.documentoEncaminhamento 
+		 * PastaFuncional.unidadeProdutora
+		 * PastaFuncional.classificacaoDocumental
+		 * PastaFuncional.dataLimite
+ 		 * Empregado.nome
+ 		 * Empregado.matricula
+		 * PastaFuncional.localizacao
+		 * Empregado.departamento
+		 * 
+		 * */
+		
+//		List<PastaFuncional> pastasFuncionais = pastaFuncionalRepository.findAll().stream()
+//				.filter(p -> p.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
+//						&& p.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
+//						&& p.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer
+//								.parseInt(filtro.get("codigoClassificacaoDocumental"))
+//						&& p.getDataLimite().equals(new Date(filtro.get("dataLimite")))
+//						&& p.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
+//				.collect(Collectors.toList());
+    	
         List<PastaFuncional> pastasFuncionais = pastaFuncionalRepository.findAll();
 
         return ResponseEntity.ok(pastasFuncionais);
