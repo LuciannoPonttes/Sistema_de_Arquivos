@@ -1,8 +1,8 @@
 package com.atos.inventario.enums;
 
 public enum RolesEnum {
-	ADMIN ("ADMIN",0),
-	USER ("USER",1);
+	ADMIN ("ADMIN",1),
+	USER ("USER",2);
 	
 	private String rol;
 	private Integer rolId;

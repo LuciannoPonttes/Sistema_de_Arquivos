@@ -12,7 +12,7 @@ public class RoleEmpregado implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idRoleEmpregado;
+	private Long idRoleEmpregado;
 	
 	private String nomeRole;
 

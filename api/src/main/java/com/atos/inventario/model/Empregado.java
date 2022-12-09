@@ -14,13 +14,15 @@ public class Empregado implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idEmpregado;
+	private Long idEmpregado;
 	
 	private String matricula;
 	private String nome;
 	private String senha;
+	private String email;
 	private Date dataLogin;
 	private String departamento;
+	
 	@ManyToMany
 	@JoinTable(name = "TB_ROLES_EMPREGADO",
 		joinColumns = @JoinColumn(name = "idEmpregado"),
@@ -28,10 +30,10 @@ public class Empregado implements Serializable {
 	private List<RoleEmpregado> roles;
 
 	
-	public long getIdAEmpregado() {
+	public Long getIdEmpregado() {
 		return idEmpregado;
 	}
-	public void setIdAEmpregado(long idEmpregado) {
+	public void setIdEmpregado(long idEmpregado) {
 		this.idEmpregado = idEmpregado;
 	}
 	public String getMatricula() {
@@ -52,7 +54,12 @@ public class Empregado implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public List<RoleEmpregado> getRoles() {
 		return roles;
 	}

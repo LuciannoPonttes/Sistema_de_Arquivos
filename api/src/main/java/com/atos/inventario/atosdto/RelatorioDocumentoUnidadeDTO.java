@@ -1,14 +1,18 @@
 package com.atos.inventario.atosdto;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
-public class RelatorioDocumentoUnidadeDTO {
+public class RelatorioDocumentoUnidadeDTO implements Serializable{
 
-	private Map<String, String> totalQuantidade;
+	private static final long serialVersionUID = 1L;
 
-	private Map<String, String> endereco;
+	private Map<String, String> totalQuantidade = new HashMap<String,String>();
 
-	private Map<String, String> indiceDocumento;
+	private Map<String, String> endereco = new HashMap<String,String>();
+
+	private Map<String, String> indiceDocumento = new HashMap<String,String>();
 
 	private FiltroRelatorioDocumentoUnidadeDTO filtro;
 

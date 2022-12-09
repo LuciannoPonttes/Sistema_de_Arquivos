@@ -1,25 +1,19 @@
-package com.atos.inventario.model;
+package com.atos.inventario.atosdto;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+public class LocalizacaoDTO implements Serializable{
 
-@Entity
-@Table(name = "TB_LOCALIZACAO")
-public class Localizacao implements Serializable {
-	
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private long idLocalizacao;
 	
-	private String endereco="";
-	private String predio="";
-	private String sala="";
-	private String bloco="";
-	private String posicao="";
-	private String numeroCaixa="";
+	private String endereco;
+	private String predio;
+	private String sala;
+	private String bloco;
+	private String posicao;
+	private String numeroCaixa;
 	
 	public long getIdLocalizacao() {
 		return idLocalizacao;
