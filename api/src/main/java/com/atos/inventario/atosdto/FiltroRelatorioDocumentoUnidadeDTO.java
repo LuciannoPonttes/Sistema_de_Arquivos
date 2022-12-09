@@ -1,6 +1,10 @@
 package com.atos.inventario.atosdto;
 
-public class FiltroRelatorioDocumentoUnidadeDTO {
+import java.io.Serializable;
+
+public class FiltroRelatorioDocumentoUnidadeDTO implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private String unidade;
 

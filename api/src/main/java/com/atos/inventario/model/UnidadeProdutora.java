@@ -16,14 +16,15 @@ public class UnidadeProdutora implements Serializable  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idUnidadeProdutora;
+	private Long idUnidadeProdutora;
 	private String sigla;
+	private String descricao;
 
-	public long getIdUnidadeProdutora() {
+	public Long getIdUnidadeProdutora() {
 		return idUnidadeProdutora;
 	}
 
-	public void setIdUnidadeProdutora(long idUnidadeProdutora) {
+	public void setIdUnidadeProdutora(Long idUnidadeProdutora) {
 		this.idUnidadeProdutora = idUnidadeProdutora;
 	}
 
@@ -35,8 +36,13 @@ public class UnidadeProdutora implements Serializable  {
 		this.sigla = sigla;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getDescricao() {
+		return descricao;
 	}
-	
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
 }

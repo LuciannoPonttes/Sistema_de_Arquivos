@@ -4,13 +4,15 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Documento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cod_unidade_produtora", referencedColumnName = "idUnidadeProdutora")
@@ -32,10 +34,10 @@ public abstract class Documento {
 	@JoinColumn(name = "cod_localizacao", referencedColumnName = "idLocalizacao")
 	private Localizacao localizacao;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public UnidadeProdutora getUnidadeProdutora() {
@@ -56,6 +58,13 @@ public abstract class Documento {
 	public void setDataLimite(Date dataLimite) {
 		this.dataLimite = dataLimite;
 	}
+	public String getMatriculaEmpregado() {
+		return empregado.getMatricula();
+	}
+	public String getNomeEmpregado() {
+		return empregado.getNome();
+	}
+	@JsonIgnore 
 	public Empregado getEmpregado() {
 		return empregado;
 	}
