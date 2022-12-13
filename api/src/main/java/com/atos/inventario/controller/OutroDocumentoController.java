@@ -53,7 +53,7 @@ public class OutroDocumentoController {
 		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(outroDocumentoDto.getUnidadeProdutoraId()).get();
 		outroDocumento.setUnidadeProdutora(unidadeProdutora);
 		
-		Empregado empregado = empregadoRepository.findById(1L).get();
+		Empregado empregado = empregadoRepository.findById(outroDocumentoDto.getEmpregadoId()).get();
 		outroDocumento.setEmpregado(empregado);
 		
 		ClassificacaoDocumental classificacaoDocumental = classificacaoDocumentalRepository.findById(outroDocumentoDto.getClassificacaoDocumentalId()).get();

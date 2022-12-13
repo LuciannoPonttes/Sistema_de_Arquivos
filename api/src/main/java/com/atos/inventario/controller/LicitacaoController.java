@@ -94,7 +94,7 @@ public class LicitacaoController {
 		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(licitacaoDto.getUnidadeProdutoraId()).get();
 		licitacao.setUnidadeProdutora(unidadeProdutora);
 		
-		Empregado empregado = empregadoRepository.findById(1L).get();
+		Empregado empregado = empregadoRepository.findById(licitacaoDto.getEmpregadoId()).get();
 		licitacao.setEmpregado(empregado);
 		
 		ClassificacaoDocumental classificacaoDocumental = classificacaoDocumentalRepository.findById(licitacaoDto.getClassificacaoDocumentalId()).get();

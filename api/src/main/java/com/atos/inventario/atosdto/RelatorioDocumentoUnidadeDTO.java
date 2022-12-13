@@ -13,6 +13,8 @@ public class RelatorioDocumentoUnidadeDTO implements Serializable{
 	private Map<String, String> endereco = new HashMap<String,String>();
 
 	private Map<String, String> indiceDocumento = new HashMap<String,String>();
+	
+	private Map<String, String> totalCaixas = new HashMap<String,String>();
 
 	private FiltroRelatorioDocumentoUnidadeDTO filtro;
 
@@ -47,5 +49,15 @@ public class RelatorioDocumentoUnidadeDTO implements Serializable{
 	public void setFiltro(FiltroRelatorioDocumentoUnidadeDTO filtro) {
 		this.filtro = filtro;
 	}
+
+	public Map<String, String> getTotalCaixas() {
+		return totalCaixas;
+	}
+
+	public void setTotalCaixas(Map<String, String> totalCaixas) {
+		this.totalCaixas = totalCaixas;
+	}
+	
+	
 
 }

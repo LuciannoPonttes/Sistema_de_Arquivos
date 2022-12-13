@@ -43,11 +43,6 @@ public class PastaFuncionalController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-    @PostMapping(value = "/cadastrarPasta")
-    public ResponseEntity<PastaFuncional> save(@RequestBody PastaFuncional toSave) {
-        return ResponseEntity.ok(pastaFuncionalRepository.save(toSave));
-    }
-
     @GetMapping(value = "/pastas")
     public ResponseEntity<List<PastaFuncional>> list(@RequestBody(required=false) Map<String, String> filtro) {
 
@@ -78,7 +73,7 @@ public class PastaFuncionalController {
         return ResponseEntity.ok(pastasFuncionais);
     }
     
-    @PostMapping(value="/cadastrapasta")
+    @PostMapping(value="/cadastrarPasta")
     public ResponseEntity<PastaFuncional> cadastrar(@RequestBody PastaFuncionalDTO pastaFuncionalDto){
     	
 		ModelMapper mapper = new ModelMapper();
@@ -88,7 +83,7 @@ public class PastaFuncionalController {
 		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(pastaFuncionalDto.getUnidadeProdutoraId()).get();
 		pastaFuncional.setUnidadeProdutora(unidadeProdutora);
 
-		Empregado empregado = empregadoRepository.findById(1L).get();
+		Empregado empregado = empregadoRepository.findById(pastaFuncionalDto.getEmpregadoId()).get();
 		pastaFuncional.setEmpregado(empregado);
 
 		ClassificacaoDocumental classificacaoDocumental = classificacaoDocumentalRepository.findById(pastaFuncionalDto.getClassificacaoDocumentalId()).get();
