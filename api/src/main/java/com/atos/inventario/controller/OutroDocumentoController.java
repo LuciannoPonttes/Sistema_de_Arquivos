@@ -1,9 +1,19 @@
 package com.atos.inventario.controller;
 
 
+import com.atos.inventario.atosdto.OutroDocumentoDTO;
+import com.atos.inventario.model.ClassificacaoDocumental;
+import com.atos.inventario.model.Empregado;
+import com.atos.inventario.model.Localizacao;
 import com.atos.inventario.model.OutroDocumento;
+import com.atos.inventario.model.UnidadeProdutora;
+import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
+import com.atos.inventario.repositories.EmpregadoRepository;
 import com.atos.inventario.repositories.OutroDocumentoRepository;
+import com.atos.inventario.repositories.UnidadeProdutoraRepository;
+import com.atos.inventario.services.LocalizacaoService;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +30,39 @@ public class OutroDocumentoController {
 
 	@Autowired
     private OutroDocumentoRepository outroDocumentoRepository;
+	
+	@Autowired
+	ClassificacaoDocumentalRepository classificacaoDocumentalRepository;
+	
+	@Autowired
+	UnidadeProdutoraRepository unidadeProdutoraRepository;
+	
+	@Autowired
+	EmpregadoRepository empregadoRepository;
+	
+	@Autowired
+	LocalizacaoService localizacaoService;
 
     @PostMapping(value = "/cadastrarOutro")
-    public ResponseEntity<OutroDocumento> save(@RequestBody OutroDocumento toSave) {
-        return ResponseEntity.ok(outroDocumentoRepository.save(toSave));
+    public ResponseEntity<OutroDocumento> save(@RequestBody OutroDocumentoDTO outroDocumentoDto) {
+    	
+    	ModelMapper mapper = new ModelMapper();
+		
+    	OutroDocumento outroDocumento = mapper.map(outroDocumentoDto, OutroDocumento.class);
+		
+		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(outroDocumentoDto.getUnidadeProdutoraId()).get();
+		outroDocumento.setUnidadeProdutora(unidadeProdutora);
+		
+		Empregado empregado = empregadoRepository.findById(1L).get();
+		outroDocumento.setEmpregado(empregado);
+		
+		ClassificacaoDocumental classificacaoDocumental = classificacaoDocumentalRepository.findById(outroDocumentoDto.getClassificacaoDocumentalId()).get();
+		outroDocumento.setClassificacaoDocumental(classificacaoDocumental);
+		
+		Localizacao localizacao = localizacaoService.validaLocalizacao(outroDocumentoDto.getLocalizacao());
+		outroDocumento.setLocalizacao(localizacao);
+		
+        return ResponseEntity.ok(outroDocumentoRepository.save(outroDocumento));
     }
 
     @GetMapping(value = "/outros")
