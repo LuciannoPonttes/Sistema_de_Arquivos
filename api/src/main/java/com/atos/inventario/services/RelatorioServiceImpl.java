@@ -45,8 +45,7 @@ public class RelatorioServiceImpl implements RelatorioService{
 		
 		RelatorioDocumentoUnidadeDTO resultado = new RelatorioDocumentoUnidadeDTO();
 		resultado.setFiltro(filtro);
-		resultado.getTotalQuantidade().put("F001", totalLicitacao.toString());
-		resultado.getTotalQuantidade().put("F002", totalFinanceira.toString());
+		resultado.setTotalQuantidade(listaContrato);
 		return resultado;
 	}
 
