@@ -41,6 +41,7 @@ public class RelatorioServiceImpl implements RelatorioService{
 		for(IRowCount x : listaContrato) {
 			resultado.getTotalQuantidade().put("CONTRATO;"+x.getEndereco(),  x.getTotal().toString());
 		}
+
 		return resultado;
 	}
 

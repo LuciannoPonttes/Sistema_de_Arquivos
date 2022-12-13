@@ -1,9 +1,19 @@
 package com.atos.inventario.controller;
 
 
+import com.atos.inventario.atosdto.PastaFuncionalDTO;
+import com.atos.inventario.model.ClassificacaoDocumental;
+import com.atos.inventario.model.Empregado;
+import com.atos.inventario.model.Localizacao;
 import com.atos.inventario.model.PastaFuncional;
+import com.atos.inventario.model.UnidadeProdutora;
+import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
+import com.atos.inventario.repositories.EmpregadoRepository;
 import com.atos.inventario.repositories.PastaFuncionalRepository;
+import com.atos.inventario.repositories.UnidadeProdutoraRepository;
+import com.atos.inventario.services.LocalizacaoService;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +30,18 @@ public class PastaFuncionalController {
 
 	@Autowired
     private PastaFuncionalRepository pastaFuncionalRepository;
+	
+	@Autowired
+	ClassificacaoDocumentalRepository classificacaoDocumentalRepository;
+	
+	@Autowired
+	UnidadeProdutoraRepository unidadeProdutoraRepository;
+	
+	@Autowired
+	EmpregadoRepository empregadoRepository;
+	
+	@Autowired
+	LocalizacaoService localizacaoService;
 
     @PostMapping(value = "/cadastrarPasta")
     public ResponseEntity<PastaFuncional> save(@RequestBody PastaFuncional toSave) {
@@ -57,7 +79,24 @@ public class PastaFuncionalController {
     }
     
     @PostMapping(value="/cadastrapasta")
-    public ResponseEntity<PastaFuncional> cadastrar(@RequestBody PastaFuncional pastaFuncional){
+    public ResponseEntity<PastaFuncional> cadastrar(@RequestBody PastaFuncionalDTO pastaFuncionalDto){
+    	
+		ModelMapper mapper = new ModelMapper();
+
+		PastaFuncional pastaFuncional = mapper.map(pastaFuncionalDto, PastaFuncional.class);
+
+		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(pastaFuncionalDto.getUnidadeProdutoraId()).get();
+		pastaFuncional.setUnidadeProdutora(unidadeProdutora);
+
+		Empregado empregado = empregadoRepository.findById(1L).get();
+		pastaFuncional.setEmpregado(empregado);
+
+		ClassificacaoDocumental classificacaoDocumental = classificacaoDocumentalRepository.findById(pastaFuncionalDto.getClassificacaoDocumentalId()).get();
+		pastaFuncional.setClassificacaoDocumental(classificacaoDocumental);
+
+		Localizacao localizacao = localizacaoService.validaLocalizacao(pastaFuncionalDto.getLocalizacao());
+		pastaFuncional.setLocalizacao(localizacao);
+    	
     	PastaFuncional pasta = pastaFuncionalRepository.save(pastaFuncional);
     	return ResponseEntity.ok(pasta);
     }
