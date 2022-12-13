@@ -1,5 +1,7 @@
 package com.atos.inventario.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +28,19 @@ public class RelatorioServiceImpl implements RelatorioService{
 	
 	@Override
 	public RelatorioDocumentoUnidadeDTO gerarRelatorio1(FiltroRelatorioDocumentoUnidadeDTO filtro) {
-		// opcao 1 lista com filtros e contar
-		Long totalLicitacao = licitacaoRepository.findAll()
-							.stream()
-							.filter(c -> c.getLocalizacao().getEndereco().contains(filtro.getUnidade()))
-							.filter(c -> c.getLocalizacao().getPredio().contains(filtro.getPredio()))
-							.count();
 		
-		Long totalFinanceira = financeiraRepository.findAll()
-				.stream()
-				.filter(c -> c.getLocalizacao().getEndereco().contains(filtro.getUnidade()))
-				.filter(c -> c.getLocalizacao().getPredio().contains(filtro.getPredio()))
-				.count();
-
-		// opcao 2 lista com query no repositorio
-		Map<String,String> listaContrato = contratoRepository.pesquisaAgrupada(filtro.getUnidade(), filtro.getPredio());
-		
+		List<IRowCount> listaContrato = new ArrayList<>();
+		if (filtro.getPredio() == null) {
+			listaContrato.addAll(contratoRepository.pesquisaAgrupadaEndereco(filtro.getUnidade()));
+		} else {
+			listaContrato.addAll(contratoRepository.pesquisaAgrupadaEnderecoPredio(filtro.getUnidade(), filtro.getPredio()));
+		}
 		
 		RelatorioDocumentoUnidadeDTO resultado = new RelatorioDocumentoUnidadeDTO();
 		resultado.setFiltro(filtro);
-		resultado.getTotalQuantidade().put("F001", totalLicitacao.toString());
-		resultado.getTotalQuantidade().put("F002", totalFinanceira.toString());
+		for(IRowCount x : listaContrato) {
+			resultado.getTotalQuantidade().put("CONTRATO;"+x.getEndereco(),  x.getTotal().toString());
+		}
 		return resultado;
 	}
 
