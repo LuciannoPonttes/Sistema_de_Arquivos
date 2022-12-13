@@ -16,8 +16,10 @@ public class Empregado implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEmpregado;
 	
+	@Column(nullable = false, unique = true)
 	private String matricula;
 	private String nome;
+	@Column(nullable = false)
 	private String senha;
 	private String email;
 	private Date dataLogin;

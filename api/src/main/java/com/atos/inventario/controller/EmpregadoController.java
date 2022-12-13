@@ -32,9 +32,9 @@ public class EmpregadoController {
 	EmpregadoRepository empregadoRepository;
 	
 	@GetMapping(value = "/empregado" )
-	public Empregado buscarEmpregado(@RequestParam String nome, @RequestParam String senha) {
+	public Empregado buscarEmpregado(@RequestParam String matricula, @RequestParam String senha) {
 		
-		Empregado empregado = empregadoRepository.findByNomeSenha(nome, senha);
+		Empregado empregado = empregadoRepository.findByMatriculaSenha(matricula, senha);
 		
 		return empregado;
 	}
