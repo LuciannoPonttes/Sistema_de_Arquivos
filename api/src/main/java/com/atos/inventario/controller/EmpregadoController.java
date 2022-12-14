@@ -3,6 +3,7 @@ package com.atos.inventario.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,9 @@ public class EmpregadoController {
 	EmpregadoRepository empregadoRepository;
 	
 	@GetMapping(value = "/empregado" )
-	public Empregado buscarEmpregado(@RequestParam String matricula, @RequestParam String senha) {
+	public Optional<Empregado> buscarEmpregado(@RequestParam String matricula, @RequestParam String senha) {
 		
-		Empregado empregado = empregadoRepository.findByMatriculaSenha(matricula, senha);
+		Optional<Empregado> empregado = empregadoRepository.findByMatriculaSenha(matricula, senha);
 		
 		return empregado;
 	}

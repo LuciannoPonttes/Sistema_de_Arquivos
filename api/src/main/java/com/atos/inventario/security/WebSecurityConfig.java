@@ -21,15 +21,27 @@ public class WebSecurityConfig {
    
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+		http.csrf().disable()
+        .authorizeRequests()
+            .anyRequest().authenticated()
+            .and()
+        .formLogin().loginPage("/login")
+        .permitAll()
+            .and()
+        .logout()
+        .permitAll();
+		return http.build();
+		
+		/*http.csrf().disable()
     		.authorizeRequests()
-    		.antMatchers(HttpMethod.GET,"/api/**").permitAll()
-    		.antMatchers(HttpMethod.POST,"/api/**").permitAll()
+    		.antMatchers(HttpMethod.GET,"login").permitAll()    		
         	.anyRequest()
         	.authenticated()
+        	.antMatchers(HttpMethod.GET,"/api/**").permitAll()
+        	.antMatchers(HttpMethod.POST,"/api/**").permitAll()
         	.and()
         	.httpBasic();
-        return http.build();
+        return http.build();*/
 
 	}
 	/*
