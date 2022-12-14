@@ -91,7 +91,7 @@ public class FinanceiraController {
 		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(financeiraDto.getUnidadeProdutoraId()).get();
 		financeira.setUnidadeProdutora(unidadeProdutora);
 		
-		Empregado empregado = empregadoRepository.findById(1L).get();
+		Empregado empregado = empregadoRepository.findById(financeiraDto.getEmpregadoId()).get();
 		financeira.setEmpregado(empregado);
 		
 		ClassificacaoDocumental classificacaoDocumental = classificacaoDocumentalRepository.findById(financeiraDto.getClassificacaoDocumentalId()).get();

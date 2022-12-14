@@ -10,4 +10,5 @@ public interface EmpregadoRepository extends JpaRepository<Empregado, Long> {
 	@Query("SELECT e FROM Empregado e WHERE e.matricula=:matricula and e.senha =:senha ")
     public Empregado findByMatriculaSenha(String matricula, String senha);
 	
+	public Empregado findByMatricula(String matricula);
 }

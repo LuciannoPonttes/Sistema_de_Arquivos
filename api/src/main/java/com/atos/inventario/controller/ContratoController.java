@@ -95,7 +95,7 @@ public class ContratoController {
 		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(contratoDto.getUnidadeProdutoraId()).get();
 		contrato.setUnidadeProdutora(unidadeProdutora);
 		
-		Empregado empregado = empregadoRepository.findById(1L).get();
+		Empregado empregado = empregadoRepository.findById(contratoDto.getEmpregadoId()).get();
 		contrato.setEmpregado(empregado);
 		
 		ClassificacaoDocumental classificacaoDocumental = classificacaoDocumentalRepository.findById(contratoDto.getClassificacaoDocumentalId()).get();

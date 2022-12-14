@@ -1,8 +1,5 @@
 package com.atos.inventario.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +23,11 @@ public class RelatorioController {
 	@GetMapping("/relatorio1")
 	public ResponseEntity<RelatorioDocumentoUnidadeDTO> gerarRelatorio1(@RequestBody FiltroRelatorioDocumentoUnidadeDTO filtro) {	
 		return ResponseEntity.ok(relatorioService.gerarRelatorio1(filtro));
+	}
+
+	@GetMapping("/relatorio2")
+	public ResponseEntity<RelatorioDocumentoUnidadeDTO> gerarRelatorio2(@RequestBody FiltroRelatorioDocumentoUnidadeDTO filtro) {	
+		return ResponseEntity.ok(relatorioService.gerarRelatorio2(filtro));
 	}
 
 }
