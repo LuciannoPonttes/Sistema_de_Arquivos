@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"35\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -84,7 +84,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://{{HOST}}:8080/api/contrato/1",
+							"raw": "http://{{HOST}}:8080/api/contrato/3",
 							"protocol": "http",
 							"host": [
 								"{{HOST}}"
@@ -93,7 +93,7 @@
 							"path": [
 								"api",
 								"contrato",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -131,7 +131,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutora\": { \r\n        \"sigla\":\"RECFED\"\r\n    },\r\n    \"classificacaoDocumental\": {\r\n        \"classificacaoDocumental\":\"Contrato2022\",\r\n        \"descricao\":\"Contrato Tijolos MCMV\"\r\n    },\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregado\": {\r\n        \"matricula\":\"USR1001\",\r\n        \"nome\":\"PEDRO PEREZ\"\r\n    },\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"35\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n    },\r\n    \"documentoEncaminhamento\":\"LI-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"numeroProcessoLicitatorio\":\"PLIC.4567\",\r\n    \"objetoResumido\":\"LICITACAO OBRA PONTE MARECHAL PINZON\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -227,7 +227,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutora\": { \r\n        \"sigla\":\"RECFED\"\r\n    },\r\n    \"classificacaoDocumental\": {\r\n        \"classificacaoDocumental\":\"Contrato2022\",\r\n        \"descricao\":\"Contrato Tijolos MCMV\"\r\n    },\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregado\": {\r\n        \"matricula\":\"USR1001\",\r\n        \"nome\":\"PEDRO PEREZ\"\r\n    },\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"BLOCO A\",\r\n        \"sala\":\"301\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\",\r\n    \"dataPagamento\": \"2022-12-06\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -323,7 +323,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutora\": { \r\n        \"sigla\":\"RECFED\"\r\n    },\r\n    \"classificacaoDocumental\": {\r\n        \"classificacaoDocumental\":\"Contrato2022\",\r\n        \"descricao\":\"Contrato Tijolos MCMV\"\r\n    },\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregado\": {\r\n        \"matricula\":\"USR1001\",\r\n        \"nome\":\"PEDRO PEREZ\"\r\n    },\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"BLOCO A\",\r\n        \"sala\":\"301\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -419,7 +419,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutora\": { \r\n        \"sigla\":\"RECFED\"\r\n    },\r\n    \"classificacaoDocumental\": {\r\n        \"classificacaoDocumental\":\"Contrato2022\",\r\n        \"descricao\":\"Contrato Tijolos MCMV\"\r\n    },\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregado\": {\r\n        \"matricula\":\"USR1001\",\r\n        \"nome\":\"PEDRO PEREZ\"\r\n    },\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"BLOCO A\",\r\n        \"sala\":\"301\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -498,7 +498,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidade\":\"RECEITA FEDERAL-SP\",\r\n    \"predio\":\"35\",\r\n    \"agrupar\":\"TRUE\",\r\n    \"dataRelatorio\":\"\"\r\n}",
+							"raw": "{\r\n    \"unidade\":\"RECEITA FEDERAL-SP\",\r\n    \"predio\":\"35\",\r\n    \"agrupar\":\"FALSE\",\r\n    \"dataRelatorio\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -515,6 +515,41 @@
 							"path": [
 								"api",
 								"relatorio1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{HOST}}:8080/api/empregado?nome=admin&senha=senha123",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"empregado"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "admin"
+								},
+								{
+									"key": "senha",
+									"value": "senha123"
+								}
 							]
 						}
 					},
