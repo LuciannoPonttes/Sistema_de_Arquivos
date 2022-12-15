@@ -1,11 +1,8 @@
 package com.atos.inventario.security;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -32,8 +29,10 @@ public class UserDetailServiceImpl implements UserDetailsService{
 	public UserDetails loadUserByUsername(String matricula) throws UsernameNotFoundException {
 		final List<GrantedAuthority> grantedAuths = new ArrayList<>();
         grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-        final UserDetails principal = new User(matricula, "senha", grantedAuths);
-        return principal;
+        
+        Empregado empregado = empregadoRepository.findByMatriculaSenha(matricula, "senha").orElseThrow(() -> new UsernameNotFoundException("Empregado não Encontrado" + matricula));  
+        
+        return new User(empregado.getMatricula(), "senha",true,true,true,true, grantedAuths );
 	}
 
 }

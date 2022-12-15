@@ -1,14 +1,29 @@
 package com.atos.inventario.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TB_EMPREGADO")
-public class Empregado implements Serializable {
+public class Empregado implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -62,6 +77,7 @@ public class Empregado implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@JsonIgnore
 	public List<RoleEmpregado> getRoles() {
 		return roles;
 	}
@@ -79,6 +95,38 @@ public class Empregado implements Serializable {
 	}
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
+	}
+	@Override
+	@JsonIgnore
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<RoleEmpregado> rolesEmpregado = new ArrayList<RoleEmpregado>();
+		rolesEmpregado.add(new RoleEmpregado());
+		return rolesEmpregado;
+	}
+	@Override
+	@JsonIgnore
+	public String getPassword() {
+		return this.senha;
+	}
+	@Override
+	public String getUsername() {
+		return this.matricula;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 	
 	
