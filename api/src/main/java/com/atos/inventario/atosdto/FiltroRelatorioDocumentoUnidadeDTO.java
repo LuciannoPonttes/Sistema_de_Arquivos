@@ -10,8 +10,6 @@ public class FiltroRelatorioDocumentoUnidadeDTO implements Serializable{
 
 	private String predio;
 
-	private String agrupar;
-
 	private String dataRelatorio;
 
 	
@@ -29,14 +27,6 @@ public class FiltroRelatorioDocumentoUnidadeDTO implements Serializable{
 
 	public void setPredio(String predio) {
 		this.predio = predio;
-	}
-
-	public String getAgrupar() {
-		return agrupar;
-	}
-
-	public void setAgrupar(String agrupar) {
-		this.agrupar = agrupar;
 	}
 
 	public String getDataRelatorio() {

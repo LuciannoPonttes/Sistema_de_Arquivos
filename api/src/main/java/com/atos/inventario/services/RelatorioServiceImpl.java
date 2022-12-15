@@ -122,12 +122,26 @@ public class RelatorioServiceImpl implements RelatorioService{
 
 	@Override
 	public RelatorioDocumentoUnidadeDTO gerarRelatorio2(FiltroRelatorioDocumentoUnidadeDTO filtro) {
-		RelatorioDocumentoUnidadeDTO resultado = new RelatorioDocumentoUnidadeDTO();
+		RelatorioDocumentoUnidadeDTO relatorio = new RelatorioDocumentoUnidadeDTO();
+		relatorio.setFiltro(filtro);
+		Long numeroFila = 1L;
+
+		List<IRowCount> listaLocalizacao = new ArrayList<>();
+		if (filtro.getPredio() == null) {
+			listaLocalizacao.addAll(localizacaoRepository.pesquisaAgrupadaEndereco(filtro.getUnidade()));
+		} else {
+			listaLocalizacao.addAll(localizacaoRepository.pesquisaAgrupadaEnderecoPredio(filtro.getUnidade(), filtro.getPredio()));
+		}
 		
-		resultado = gerarRelatorio1(filtro);
+		for(IRowCount x : listaLocalizacao) {
+			String fila = "FILA"+numeroFila.toString();
+			relatorio.getEndereco().put(fila,x.getEndereco());
+			relatorio.getTotalCaixas().put(fila, x.getTotal().toString());
+			
+			numeroFila++;
+		}
 		
-		
-		return resultado;
+		return relatorio;
 	}
 
 }
