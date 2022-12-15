@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atos.inventario.atosdto.ContratoDTO;
+import com.atos.inventario.atosdto.FiltroPesquisaDTO;
 import com.atos.inventario.model.ClassificacaoDocumental;
 import com.atos.inventario.model.Contrato;
 import com.atos.inventario.model.Empregado;
@@ -51,7 +52,7 @@ public class ContratoController {
 	LocalizacaoService localizacaoService;
 	
 	@GetMapping("/contratos")
-	public ResponseEntity<List<Contrato>> listarContrato(@RequestBody(required=false) Map<String, String> filtro) {
+	public ResponseEntity<List<Contrato>> listarContrato(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 		
 		// TODO organizar os filtros
 		/* 
