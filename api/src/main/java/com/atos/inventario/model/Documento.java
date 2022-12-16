@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.atos.inventario.enums.UnidadeProdutoraEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -14,9 +15,9 @@ public abstract class Documento {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cod_unidade_produtora", referencedColumnName = "idUnidadeProdutora")
-	private UnidadeProdutora unidadeProdutora;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, unique = true)
+	private UnidadeProdutoraEnum unidadeProdutora;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cod_classificaco_documental", referencedColumnName = "codigoClassificacaoDocumental")
@@ -40,14 +41,25 @@ public abstract class Documento {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public UnidadeProdutora getUnidadeProdutora() {
+	
+	public UnidadeProdutoraEnum getUnidadeProdutora() {
 		return unidadeProdutora;
 	}
-	public void setUnidadeProdutora(UnidadeProdutora unidadeProdutora) {
+	public String getUnidadeProdutoraDesc() {
+		return unidadeProdutora.getUnidadeProdutora();
+	}
+	public void setUnidadeProdutora(UnidadeProdutoraEnum unidadeProdutora) {
 		this.unidadeProdutora = unidadeProdutora;
 	}
+	@JsonIgnore
 	public ClassificacaoDocumental getClassificacaoDocumental() {
 		return classificacaoDocumental;
+	}
+	public Long getClassificacaoDocumentalId() {
+		return classificacaoDocumental.getCodigoClassificacaoDocumental();
+	}
+	public String getClassificacaoDocumentalDesc() {
+		return this.classificacaoDocumental.getDescricao();
 	}
 	public void setClassificacaoDocumental(ClassificacaoDocumental classificacaoDocumental) {
 		this.classificacaoDocumental = classificacaoDocumental;
