@@ -29,5 +29,12 @@ public enum DepartamentoEmpregadoEnum {
 		return descricao;
 	}
 
-
+	public static DepartamentoEmpregadoEnum getByCodigo(int codigo) {
+		for (DepartamentoEmpregadoEnum item : values()) {
+            if (item.getIdDepartamento() == codigo) {
+				return item;
+			}
+		}
+		return null;
+	}
 }

@@ -2,15 +2,14 @@ package com.atos.inventario.controller;
 
 
 import com.atos.inventario.atosdto.PastaFuncionalDTO;
+import com.atos.inventario.enums.UnidadeProdutoraEnum;
 import com.atos.inventario.model.ClassificacaoDocumental;
 import com.atos.inventario.model.Empregado;
 import com.atos.inventario.model.Localizacao;
 import com.atos.inventario.model.PastaFuncional;
-import com.atos.inventario.model.UnidadeProdutora;
 import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
 import com.atos.inventario.repositories.EmpregadoRepository;
 import com.atos.inventario.repositories.PastaFuncionalRepository;
-import com.atos.inventario.repositories.UnidadeProdutoraRepository;
 import com.atos.inventario.services.LocalizacaoService;
 
 import org.modelmapper.ModelMapper;
@@ -33,9 +32,6 @@ public class PastaFuncionalController {
 	
 	@Autowired
 	ClassificacaoDocumentalRepository classificacaoDocumentalRepository;
-	
-	@Autowired
-	UnidadeProdutoraRepository unidadeProdutoraRepository;
 	
 	@Autowired
 	EmpregadoRepository empregadoRepository;
@@ -80,9 +76,9 @@ public class PastaFuncionalController {
 
 		PastaFuncional pastaFuncional = mapper.map(pastaFuncionalDto, PastaFuncional.class);
 
-		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(pastaFuncionalDto.getUnidadeProdutoraId()).get();
+		UnidadeProdutoraEnum unidadeProdutora = UnidadeProdutoraEnum.getByCodigo(pastaFuncionalDto.getUnidadeProdutoraId());
 		pastaFuncional.setUnidadeProdutora(unidadeProdutora);
-
+		
 		Empregado empregado = empregadoRepository.findById(pastaFuncionalDto.getEmpregadoId()).get();
 		pastaFuncional.setEmpregado(empregado);
 

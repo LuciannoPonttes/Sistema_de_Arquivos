@@ -12,7 +12,7 @@ public class PastaFuncionalDTO implements Serializable {
 	private String numeroCaixaEscritorioOrigem;
 	private String numeroCaixaArquivoCustodia;
 
-	private Long unidadeProdutoraId;
+	private String unidadeProdutoraId;
 	private Long classificacaoDocumentalId;
 	private Date dataLimite;
 	private Long empregadoId;
@@ -51,11 +51,11 @@ public class PastaFuncionalDTO implements Serializable {
 		this.numeroCaixaArquivoCustodia = numeroCaixaArquivoCustodia;
 	}
 
-	public Long getUnidadeProdutoraId() {
+	public String getUnidadeProdutoraId() {
 		return unidadeProdutoraId;
 	}
 
-	public void setUnidadeProdutoraId(Long unidadeProdutoraId) {
+	public void setUnidadeProdutoraId(String unidadeProdutoraId) {
 		this.unidadeProdutoraId = unidadeProdutoraId;
 	}
 

@@ -19,15 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atos.inventario.atosdto.LicitacaoDTO;
+import com.atos.inventario.enums.UnidadeProdutoraEnum;
 import com.atos.inventario.model.ClassificacaoDocumental;
 import com.atos.inventario.model.Empregado;
 import com.atos.inventario.model.Licitacao;
 import com.atos.inventario.model.Localizacao;
-import com.atos.inventario.model.UnidadeProdutora;
 import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
 import com.atos.inventario.repositories.EmpregadoRepository;
 import com.atos.inventario.repositories.LicitacaoRepository;
-import com.atos.inventario.repositories.UnidadeProdutoraRepository;
 import com.atos.inventario.services.LocalizacaoService;
 
 @RestController
@@ -40,9 +39,6 @@ public class LicitacaoController {
 	
 	@Autowired
 	ClassificacaoDocumentalRepository classificacaoDocumentalRepository;
-	
-	@Autowired
-	UnidadeProdutoraRepository unidadeProdutoraRepository;
 	
 	@Autowired
 	EmpregadoRepository empregadoRepository;
@@ -91,7 +87,7 @@ public class LicitacaoController {
 		
 		Licitacao licitacao = mapper.map(licitacaoDto, Licitacao.class);
 		
-		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(licitacaoDto.getUnidadeProdutoraId()).get();
+		UnidadeProdutoraEnum unidadeProdutora = UnidadeProdutoraEnum.getByCodigo(licitacaoDto.getUnidadeProdutoraId());
 		licitacao.setUnidadeProdutora(unidadeProdutora);
 		
 		Empregado empregado = empregadoRepository.findById(licitacaoDto.getEmpregadoId()).get();
