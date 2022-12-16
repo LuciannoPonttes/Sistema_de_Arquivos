@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +21,7 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.atos.inventario.enums.DepartamentoEmpregadoEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -38,11 +41,12 @@ public class Empregado implements UserDetails, Serializable {
 	private String senha;
 	private String email;
 	private Date dataLogin;
-	private String departamento;
-
-//	@Column(columnDefinition="boolean default true")
 	private boolean ativo = true;
 	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable = false, unique = true)
+	private DepartamentoEmpregadoEnum departamento;
+  
 	@ManyToMany
 	@JoinTable(name = "TB_ROLES_EMPREGADO",
 		joinColumns = @JoinColumn(name = "idEmpregado"),
@@ -93,10 +97,11 @@ public class Empregado implements UserDetails, Serializable {
 	public void setDataLogin(Date dataLogin) {
 		this.dataLogin = dataLogin;
 	}
-	public String getDepartamento() {
-		return departamento;
+	public int getDepartamentoId() {
+		return departamento.getIdDepartamento();
 	}
-	public void setDepartamento(String departamento) {
+	@JsonIgnore
+	public void setDepartamento(DepartamentoEmpregadoEnum departamento) {
 		this.departamento = departamento;
 	}
 
@@ -108,6 +113,11 @@ public class Empregado implements UserDetails, Serializable {
 		this.ativo = ativo;
 	}
 
+
+	public String getDepartamentoDesc() {
+		return departamento.getDescricao();
+	}
+	
 	@Override
 	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {

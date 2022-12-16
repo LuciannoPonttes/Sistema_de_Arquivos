@@ -16,7 +16,7 @@ public class ContratoDTO implements Serializable{
 	private String empresaContratada;
 	private String objetoResumido;
 	
-	private Long unidadeProdutoraId;
+	private String unidadeProdutoraId;
 	private Long classificacaoDocumentalId;
 	private Date dataLimite;
 	private Long empregadoId;
@@ -87,11 +87,11 @@ public class ContratoDTO implements Serializable{
 		this.objetoResumido = objetoResumido;
 	}
 
-	public Long getUnidadeProdutoraId() {
+	public String getUnidadeProdutoraId() {
 		return unidadeProdutoraId;
 	}
 
-	public void setUnidadeProdutoraId(Long unidadeProdutoraId) {
+	public void setUnidadeProdutoraId(String unidadeProdutoraId) {
 		this.unidadeProdutoraId = unidadeProdutoraId;
 	}
 

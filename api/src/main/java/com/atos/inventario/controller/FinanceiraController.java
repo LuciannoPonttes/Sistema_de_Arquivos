@@ -1,8 +1,6 @@
 package com.atos.inventario.controller;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -18,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atos.inventario.atosdto.FiltroPesquisaDTO;
 import com.atos.inventario.atosdto.FinanceiraDTO;
+import com.atos.inventario.enums.UnidadeProdutoraEnum;
 import com.atos.inventario.model.ClassificacaoDocumental;
 import com.atos.inventario.model.Empregado;
 import com.atos.inventario.model.Financeira;
 import com.atos.inventario.model.Localizacao;
-import com.atos.inventario.model.UnidadeProdutora;
 import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
 import com.atos.inventario.repositories.EmpregadoRepository;
 import com.atos.inventario.repositories.FinanceiraRepository;
-import com.atos.inventario.repositories.UnidadeProdutoraRepository;
 import com.atos.inventario.services.LocalizacaoService;
 
 @RestController
@@ -42,16 +40,13 @@ public class FinanceiraController {
 	ClassificacaoDocumentalRepository classificacaoDocumentalRepository;
 	
 	@Autowired
-	UnidadeProdutoraRepository unidadeProdutoraRepository;
-	
-	@Autowired
 	EmpregadoRepository empregadoRepository;
 	
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-	@GetMapping("/financeiras")
-	public ResponseEntity<List<Financeira>> listarFinanceira(@RequestBody(required=false) Map<String, String> filtro) {
+	@PostMapping("/financeiras")
+	public ResponseEntity<List<Financeira>> listarFinanceira(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 		
 		// TODO organizar os filtros
 		/* 
@@ -66,18 +61,12 @@ public class FinanceiraController {
 		 * 
 		 * */
 
-//		List<Financeira> financeiras = financeiraRepository.findAll().stream()
-//				.filter(f -> f.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
-//						&& f.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
-//						&& f.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer
-//								.parseInt(filtro.get("codigoClassificacaoDocumental"))
-//						&& f.getDataLimite().equals(new Date(filtro.get("dataLimite")))
-//						&& f.getDataPagamento().equals(new Date(filtro.get("dataPagamento")))
-//						&& f.getUnidadePagamento().equals(filtro.get("unidadePagamento"))
-//						&& f.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
-//				.collect(Collectors.toList());
-
-		List<Financeira> financeiras = financeiraRepository.findAll();
+		List<Financeira> financeiras = financeiraRepository.findAll().stream()
+				.filter(filtro.getUnidadeProdutora() != null ? f -> f.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : f -> true)
+				.filter(filtro.getClassificacaoDocumental() != null ? f -> f.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : c -> true)
+				.filter(filtro.getDataLimite() != null ? f -> f.getDataLimite().equals(filtro.getDataLimite()) : c -> true)
+				.filter(filtro.getLocalizacao() != null ? f -> f.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : c -> true)
+				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(financeiras);
 	}
@@ -88,7 +77,7 @@ public class FinanceiraController {
 		
 		Financeira financeira = mapper.map(financeiraDto, Financeira.class);
 		
-		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(financeiraDto.getUnidadeProdutoraId()).get();
+		UnidadeProdutoraEnum unidadeProdutora = UnidadeProdutoraEnum.getByCodigo(financeiraDto.getUnidadeProdutoraId());
 		financeira.setUnidadeProdutora(unidadeProdutora);
 		
 		Empregado empregado = empregadoRepository.findById(financeiraDto.getEmpregadoId()).get();

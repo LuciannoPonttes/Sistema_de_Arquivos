@@ -13,13 +13,14 @@ insert into tb_unidade_pagamento values (3,'EXTR','GASTOS EXTRAORDINARIOS');
 insert into tb_unidade_pagamento values (4,'OPER','GASTOS OPERATIVOS');
 insert into tb_unidade_pagamento values (5,'INV','INVESTIMENTO');
 
-insert into tb_unidade_produtora values (1,'AUTO','DIVISAO AUTOMOVILES');
-insert into tb_unidade_produtora values (2,'ALIM','DIVISAO ALIMENTOS');
-insert into tb_unidade_produtora values (3,'FARM','DIVISAO FARMACIA');
-
-insert into tb_classificacao_documental values (1,'DOCGERA','DOCUMENTO GERAL');
-insert into tb_classificacao_documental values (2,'DOCEXTR','DOCUMENTO EXTRAORDINARIO');
-insert into tb_classificacao_documental values (3,'DOCANEX','ANEXO A DOCUMENTO');
-insert into tb_classificacao_documental values (4,'DOCANUL','RESOLUCAO ANULACAO');
+insert into tb_classificacao_documental values (100,'OPERAÇÕES E SERVIÇOS AEROPORTUÁRIOS');
+insert into tb_classificacao_documental values (101,'Normatização. Regulamentação');
+insert into tb_classificacao_documental values (102,'Relacionamento Institucional');
+insert into tb_classificacao_documental values (110,'COMERCIALIZAÇÃO DE SERVIÇOS E PRODUTOS AEROPORTUÁRIOS');
+insert into tb_classificacao_documental values (111,'Desenvolvimento de produtos e serviços aeroportuários');
+insert into tb_classificacao_documental values (112,'Prospecção de clientes e parceiros');
+insert into tb_classificacao_documental values (113,'Gestão do Mix Comercial dos aeroportos');
+insert into tb_classificacao_documental values (114,'Concessão de áreas dos aeródromos');
+insert into tb_classificacao_documental values (115,'Gestão da qualidade de produtos e serviços aeroportuários');
 
 

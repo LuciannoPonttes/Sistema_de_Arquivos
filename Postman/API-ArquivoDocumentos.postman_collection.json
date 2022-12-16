@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": \"CONG\",\r\n    \"classificacaoDocumentalId\":100,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -131,7 +131,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": \"SEDE\",\r\n    \"classificacaoDocumentalId\":100,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -227,7 +227,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": \"SEDE\",\r\n    \"classificacaoDocumentalId\":100,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -323,7 +323,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": \"SEDE\",\r\n    \"classificacaoDocumentalId\":100,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -419,7 +419,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"unidadeProdutoraId\": 1,\r\n    \"classificacaoDocumentalId\":1,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
+							"raw": "{\r\n    \"unidadeProdutoraId\": \"SEDE\",\r\n    \"classificacaoDocumentalId\":100,\r\n    \"dataLimite\": \"2022-12-31\",\r\n    \"empregadoId\": 1,\r\n    \"dataCriacao\": \"2022-12-06\",\r\n    \"localizacao\": {\r\n        \"endereco\":\"RECEITA FEDERAL-SP\",\r\n        \"predio\":\"40\",\r\n        \"bloco\":\"A\",\r\n        \"sala\":\"301\",\r\n        \"posicao\":\"N3\",\r\n        \"numeroCaixa\":\"CX-200\"\r\n        \r\n    },\r\n    \"documentoEncaminhamento\":\"CO-0100100\",\r\n    \"empresaContratada\":\"EMPRESA E001\",\r\n    \"numeroCaixaArquivoCustodia\":\"CX100-1001001\",\r\n    \"numeroCaixaEscritorioOrigem\":\"CE100-201314\",\r\n    \"numeroContrato\":\"CT-0100101\",\r\n    \"numeroPec\":\"PEC.3322\",\r\n    \"objetoResumido\":\"CONTRATO FORNECIMENTO TIJOLO MCMV\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -523,39 +523,64 @@
 			]
 		},
 		{
-			"name": "Login",
-			"item": [
-				{
-					"name": "Login",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://{{HOST}}:8080/api/empregado?nome=admin&senha=senha123",
-							"protocol": "http",
-							"host": [
-								"{{HOST}}"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"empregado"
-							],
-							"query": [
-								{
-									"key": "nome",
-									"value": "admin"
-								},
-								{
-									"key": "senha",
-									"value": "senha123"
-								}
-							]
+			"name": "Classificacao documental",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{HOST}}:8080/api/empregado?nome=admin&senha=senha123",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"empregado"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "admin"
+						},
+						{
+							"key": "senha",
+							"value": "senha123"
 						}
-					},
-					"response": []
+					]
 				}
-			]
+			},
+			"response": []
+		},
+		{
+			"name": "Login Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{HOST}}:8080/api/empregado?nome=admin&senha=senha123",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"empregado"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "admin"
+						},
+						{
+							"key": "senha",
+							"value": "senha123"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

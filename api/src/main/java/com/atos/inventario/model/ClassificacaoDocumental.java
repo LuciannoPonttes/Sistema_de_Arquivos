@@ -17,7 +17,6 @@ public class ClassificacaoDocumental implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codigoClassificacaoDocumental;
 	
-	private String classificacaoDocumental;
 	private String descricao;
 	
 	public Long getCodigoClassificacaoDocumental() {
@@ -25,12 +24,6 @@ public class ClassificacaoDocumental implements Serializable {
 	}
 	public void setCodigoClassificacaoDocumental(Long codigoClassificacaoDocumental) {
 		this.codigoClassificacaoDocumental = codigoClassificacaoDocumental;
-	}
-	public String getClassificacaoDocumental() {
-		return classificacaoDocumental;
-	}
-	public void setClassificacaoDocumental(String classificacaoDocumental) {
-		this.classificacaoDocumental = classificacaoDocumental;
 	}
 	public String getDescricao() {
 		return descricao;
