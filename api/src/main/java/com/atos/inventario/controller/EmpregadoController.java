@@ -3,6 +3,7 @@ package com.atos.inventario.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.atos.inventario.atosdto.EmpregadoDTO;
 import com.atos.inventario.atosdto.FiltroPesquisaEmpregadoDTO;
@@ -31,8 +32,13 @@ public class EmpregadoController {
 	@PostMapping(value = "/empregados")
 	public ResponseEntity<List<EmpregadoDTO>> listarEmpregados(@RequestBody(required = false) FiltroPesquisaEmpregadoDTO filtro){
 		List<EmpregadoDTO> listEmpregados = new ArrayList<>();
-		List<Empregado> empregados = empregadoRepository.findByAtivoTrue();
-		
+		List<Empregado> empregados = empregadoRepository.findByAtivoTrue().stream()
+				.filter( filtro.getNome() != null ? e -> e.getNome().contains(filtro.getNome()) : e -> true )
+				.filter( filtro.getMatricula() != null ? e -> e.getMatricula().contains(filtro.getMatricula()) : e -> true)
+				.filter( filtro.getEmail() != null ? e -> e.getEmail().contains(filtro.getEmail()) : e -> true )
+				.filter( filtro.getUnidadeDepartamento() != null ? e -> e.getDepartamento().contains(filtro.getUnidadeDepartamento()) : e -> true )
+				.collect(Collectors.toList());
+
 		for (Empregado emp : empregados){
 			listEmpregados.add(new EmpregadoDTO(
 				emp.getIdEmpregado(),
