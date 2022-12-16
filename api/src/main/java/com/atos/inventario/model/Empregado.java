@@ -41,11 +41,12 @@ public class Empregado implements UserDetails, Serializable {
 	private String senha;
 	private String email;
 	private Date dataLogin;
+	private boolean ativo = true;
 	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = false, unique = true)
 	private DepartamentoEmpregadoEnum departamento;
-	
+  
 	@ManyToMany
 	@JoinTable(name = "TB_ROLES_EMPREGADO",
 		joinColumns = @JoinColumn(name = "idEmpregado"),
@@ -103,6 +104,16 @@ public class Empregado implements UserDetails, Serializable {
 	public void setDepartamento(DepartamentoEmpregadoEnum departamento) {
 		this.departamento = departamento;
 	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+
 	public String getDepartamentoDesc() {
 		return departamento.getDescricao();
 	}

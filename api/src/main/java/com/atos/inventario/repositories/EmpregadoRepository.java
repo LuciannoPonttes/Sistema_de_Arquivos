@@ -1,5 +1,6 @@
 package com.atos.inventario.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,7 @@ public interface EmpregadoRepository extends JpaRepository<Empregado, Long> {
 	public Empregado findByMatriculaSenha2(String matricula, String senha);
 	
 	public Empregado findByMatricula(String matricula);
+
+	@Query
+	public List<Empregado> findByAtivoTrue();
 }
