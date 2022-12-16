@@ -49,7 +49,7 @@ public class FinanceiraController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-	@GetMapping("/financeiras")
+	@PostMapping("/financeiras")
 	public ResponseEntity<List<Financeira>> listarFinanceira(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 		
 		// TODO organizar os filtros
@@ -66,11 +66,10 @@ public class FinanceiraController {
 		 * */
 
 		List<Financeira> financeiras = financeiraRepository.findAll().stream()
-//				.filter(f -> "FINANCEIRA".equals(filtro.getTipoDocumento()))
-				.filter(f -> f.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()))
-				.filter(f -> f.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()))
-				.filter(f -> f.getDataLimite().equals(filtro.getDataLimite()))
-				.filter(f -> f.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()))
+				.filter(filtro.getUnidadeProdutora() != null ? f -> f.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : f -> true)
+				.filter(filtro.getClassificacaoDocumental() != null ? f -> f.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : c -> true)
+				.filter(filtro.getDataLimite() != null ? f -> f.getDataLimite().equals(filtro.getDataLimite()) : c -> true)
+				.filter(filtro.getLocalizacao() != null ? f -> f.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : c -> true)
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(financeiras);

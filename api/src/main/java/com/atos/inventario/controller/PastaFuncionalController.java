@@ -49,7 +49,7 @@ public class PastaFuncionalController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-    @GetMapping(value = "/pastas")
+    @PostMapping(value = "/pastas")
     public ResponseEntity<List<PastaFuncional>> list(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 
 		// TODO organizar os filtros
@@ -66,11 +66,10 @@ public class PastaFuncionalController {
 		 * */
 		
 		List<PastaFuncional> pastasFuncionais = pastaFuncionalRepository.findAll().stream()
-//				.filter(p -> "PASTAFUNCIONAL".equals(filtro.getTipoDocumento()))
-				.filter(p -> p.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()))
-				.filter(p -> p.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()))
-				.filter(p -> p.getDataLimite().equals(filtro.getDataLimite()))
-				.filter(p -> p.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()))
+				.filter(filtro.getUnidadeProdutora() != null ? p -> p.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : p -> true)
+				.filter(filtro.getClassificacaoDocumental() != null ? p -> p.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : p -> true)
+				.filter(filtro.getDataLimite() != null ? p -> p.getDataLimite().equals(filtro.getDataLimite()) : p -> true)
+				.filter(filtro.getLocalizacao() != null ? p -> p.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : p -> true)
 				.collect(Collectors.toList());
     	
         return ResponseEntity.ok(pastasFuncionais);

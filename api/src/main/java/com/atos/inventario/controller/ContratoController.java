@@ -49,7 +49,7 @@ public class ContratoController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 	
-	@GetMapping("/contratos")
+	@PostMapping("/contratos")
 	public ResponseEntity<List<Contrato>> listarContrato(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 		
 		// TODO organizar os filtros
@@ -68,11 +68,10 @@ public class ContratoController {
 		 * */
 
 		List<Contrato> contratos = contratoRepository.findAll().stream()
-//				.filter(c -> "CONTRATO".equals(filtro.getTipoDocumento()))
-				.filter(c -> c.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()))
-				.filter(c -> c.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()))
-				.filter(c -> c.getDataLimite().equals(filtro.getDataLimite()))
-				.filter(c -> c.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()))
+				.filter(filtro.getUnidadeProdutora() != null ? c -> c.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : c -> true)
+				.filter(filtro.getClassificacaoDocumental() != null ? c -> c.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental())  : c -> true)
+				.filter(filtro.getDataLimite() != null ? c -> c.getDataLimite().equals(filtro.getDataLimite()) : c -> true)
+				.filter(filtro.getLocalizacao() != null ? c -> c.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : c -> true)
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(contratos);
