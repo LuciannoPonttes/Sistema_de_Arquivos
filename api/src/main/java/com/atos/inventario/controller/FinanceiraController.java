@@ -1,8 +1,6 @@
 package com.atos.inventario.controller;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atos.inventario.atosdto.FiltroPesquisaDTO;
 import com.atos.inventario.atosdto.FinanceiraDTO;
 import com.atos.inventario.model.ClassificacaoDocumental;
 import com.atos.inventario.model.Empregado;
@@ -51,7 +50,7 @@ public class FinanceiraController {
 	LocalizacaoService localizacaoService;
 
 	@GetMapping("/financeiras")
-	public ResponseEntity<List<Financeira>> listarFinanceira(@RequestBody(required=false) Map<String, String> filtro) {
+	public ResponseEntity<List<Financeira>> listarFinanceira(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 		
 		// TODO organizar os filtros
 		/* 
@@ -66,18 +65,13 @@ public class FinanceiraController {
 		 * 
 		 * */
 
-//		List<Financeira> financeiras = financeiraRepository.findAll().stream()
-//				.filter(f -> f.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
-//						&& f.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
-//						&& f.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer
-//								.parseInt(filtro.get("codigoClassificacaoDocumental"))
-//						&& f.getDataLimite().equals(new Date(filtro.get("dataLimite")))
-//						&& f.getDataPagamento().equals(new Date(filtro.get("dataPagamento")))
-//						&& f.getUnidadePagamento().equals(filtro.get("unidadePagamento"))
-//						&& f.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
-//				.collect(Collectors.toList());
-
-		List<Financeira> financeiras = financeiraRepository.findAll();
+		List<Financeira> financeiras = financeiraRepository.findAll().stream()
+//				.filter(f -> "FINANCEIRA".equals(filtro.getTipoDocumento()))
+				.filter(f -> f.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()))
+				.filter(f -> f.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()))
+				.filter(f -> f.getDataLimite().equals(filtro.getDataLimite()))
+				.filter(f -> f.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()))
+				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(financeiras);
 	}
