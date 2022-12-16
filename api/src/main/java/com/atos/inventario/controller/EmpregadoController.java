@@ -33,10 +33,10 @@ public class EmpregadoController {
 	public ResponseEntity<List<EmpregadoDTO>> listarEmpregados(@RequestBody(required = false) FiltroPesquisaEmpregadoDTO filtro){
 		List<EmpregadoDTO> listEmpregados = new ArrayList<>();
 		List<Empregado> empregados = empregadoRepository.findByAtivoTrue().stream()
-				.filter( filtro.getNome() != null ? e -> e.getNome().contains(filtro.getNome()) : e -> true )
-				.filter( filtro.getMatricula() != null ? e -> e.getMatricula().contains(filtro.getMatricula()) : e -> true)
-				.filter( filtro.getEmail() != null ? e -> e.getEmail().contains(filtro.getEmail()) : e -> true )
-				.filter( filtro.getUnidadeDepartamento() != null ? e -> e.getDepartamento().contains(filtro.getUnidadeDepartamento()) : e -> true )
+				.filter( filtro.getNome() != null ? e -> e.getNome().toLowerCase().contains(filtro.getNome().toLowerCase()) : e -> true )
+				.filter( filtro.getMatricula() != null ? e -> e.getMatricula().toLowerCase().contains(filtro.getMatricula().toLowerCase()) : e -> true)
+				.filter( filtro.getEmail() != null ? e -> e.getEmail().toLowerCase().contains(filtro.getEmail().toLowerCase()) : e -> true )
+				.filter( filtro.getUnidadeDepartamento() != null ? e -> e.getDepartamento().toLowerCase().contains(filtro.getUnidadeDepartamento().toLowerCase()) : e -> true )
 				.collect(Collectors.toList());
 
 		for (Empregado emp : empregados){
