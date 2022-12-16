@@ -18,15 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atos.inventario.atosdto.ContratoDTO;
 import com.atos.inventario.atosdto.FiltroPesquisaDTO;
+import com.atos.inventario.enums.UnidadeProdutoraEnum;
 import com.atos.inventario.model.ClassificacaoDocumental;
 import com.atos.inventario.model.Contrato;
 import com.atos.inventario.model.Empregado;
 import com.atos.inventario.model.Localizacao;
-import com.atos.inventario.model.UnidadeProdutora;
 import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
 import com.atos.inventario.repositories.ContratoRepository;
-import com.atos.inventario.repositories.EmpregadoRepository;
-import com.atos.inventario.repositories.UnidadeProdutoraRepository;
 import com.atos.inventario.services.LocalizacaoService;
 
 @RestController
@@ -39,10 +37,7 @@ public class ContratoController {
 	
 	@Autowired
 	ClassificacaoDocumentalRepository classificacaoDocumentalRepository;
-	
-	@Autowired
-	UnidadeProdutoraRepository unidadeProdutoraRepository;
-	
+		
 	@Autowired
 	EmpregadoRepository empregadoRepository;
 	
@@ -83,7 +78,7 @@ public class ContratoController {
 		
 		Contrato contrato = mapper.map(contratoDto, Contrato.class);
 		
-		UnidadeProdutora unidadeProdutora = unidadeProdutoraRepository.findById(contratoDto.getUnidadeProdutoraId()).get();
+		UnidadeProdutoraEnum unidadeProdutora = UnidadeProdutoraEnum.getByCodigo(contratoDto.getUnidadeProdutoraId());
 		contrato.setUnidadeProdutora(unidadeProdutora);
 		
 		Empregado empregado = empregadoRepository.findById(contratoDto.getEmpregadoId()).get();
