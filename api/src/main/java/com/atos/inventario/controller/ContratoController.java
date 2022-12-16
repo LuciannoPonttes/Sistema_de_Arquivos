@@ -23,8 +23,7 @@ import com.atos.inventario.model.ClassificacaoDocumental;
 import com.atos.inventario.model.Contrato;
 import com.atos.inventario.model.Empregado;
 import com.atos.inventario.model.Localizacao;
-import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
-import com.atos.inventario.repositories.ContratoRepository;
+import com.atos.inventario.repositories.*;
 import com.atos.inventario.services.LocalizacaoService;
 
 @RestController
@@ -63,7 +62,7 @@ public class ContratoController {
 		 * */
 
 		List<Contrato> contratos = contratoRepository.findAll().stream()
-				.filter(filtro.getUnidadeProdutora() != null ? c -> c.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : c -> true)
+				.filter(filtro.getUnidadeProdutora() != null ? c -> c.getUnidadeProdutora().getCodigo().equals(filtro.getUnidadeProdutora()) : c -> true)
 				.filter(filtro.getClassificacaoDocumental() != null ? c -> c.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental())  : c -> true)
 				.filter(filtro.getDataLimite() != null ? c -> c.getDataLimite().equals(filtro.getDataLimite()) : c -> true)
 				.filter(filtro.getLocalizacao() != null ? c -> c.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : c -> true)

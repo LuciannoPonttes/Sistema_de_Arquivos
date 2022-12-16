@@ -62,7 +62,7 @@ public class FinanceiraController {
 		 * */
 
 		List<Financeira> financeiras = financeiraRepository.findAll().stream()
-				.filter(filtro.getUnidadeProdutora() != null ? f -> f.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : f -> true)
+				.filter(filtro.getUnidadeProdutora() != null ? f -> f.getUnidadeProdutora().getCodigo().equals(filtro.getUnidadeProdutora()) : f -> true)
 				.filter(filtro.getClassificacaoDocumental() != null ? f -> f.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : c -> true)
 				.filter(filtro.getDataLimite() != null ? f -> f.getDataLimite().equals(filtro.getDataLimite()) : c -> true)
 				.filter(filtro.getLocalizacao() != null ? f -> f.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : c -> true)

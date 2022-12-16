@@ -62,7 +62,7 @@ public class PastaFuncionalController {
 		 * */
 		
 		List<PastaFuncional> pastasFuncionais = pastaFuncionalRepository.findAll().stream()
-				.filter(filtro.getUnidadeProdutora() != null ? p -> p.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : p -> true)
+				.filter(filtro.getUnidadeProdutora() != null ? p -> p.getUnidadeProdutora().getCodigo().equals(filtro.getUnidadeProdutora()) : p -> true)
 				.filter(filtro.getClassificacaoDocumental() != null ? p -> p.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : p -> true)
 				.filter(filtro.getDataLimite() != null ? p -> p.getDataLimite().equals(filtro.getDataLimite()) : p -> true)
 				.filter(filtro.getLocalizacao() != null ? p -> p.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : p -> true)
