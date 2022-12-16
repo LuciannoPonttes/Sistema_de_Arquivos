@@ -1,8 +1,6 @@
 package com.atos.inventario.controller;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -28,7 +26,6 @@ import com.atos.inventario.model.Localizacao;
 import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
 import com.atos.inventario.repositories.ContratoRepository;
 import com.atos.inventario.services.LocalizacaoService;
-import com.atos.inventario.repositories.EmpregadoRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -47,7 +44,7 @@ public class ContratoController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 	
-	@GetMapping("/contratos")
+	@PostMapping("/contratos")
 	public ResponseEntity<List<Contrato>> listarContrato(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 		
 		// TODO organizar os filtros
@@ -65,21 +62,13 @@ public class ContratoController {
 		 * 
 		 * */
 
-//		List<Contrato> contratos = contratoRepository.findAll().stream()
-//				.filter(c -> c.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
-//						&& c.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
-//						&& c.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer
-//								.parseInt(filtro.get("codigoClassificacaoDocumental"))
-//						&& c.getDataLimite().equals(new Date(filtro.get("dataLimite")))
-//						&& c.getNumeroContrato().equals(filtro.get("numeroContrato"))
-//						&& c.getNumeroPec().equals(filtro.get("numeroPec"))
-//						&& c.getEmpresaContratada().equals(filtro.get("empresaContratada"))
-//						&& c.getObjetoResumido().equals(filtro.get("objetoResumido"))
-//						&& c.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
-//				.collect(Collectors.toList());
+		List<Contrato> contratos = contratoRepository.findAll().stream()
+				.filter(filtro.getUnidadeProdutora() != null ? c -> c.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : c -> true)
+				.filter(filtro.getClassificacaoDocumental() != null ? c -> c.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental())  : c -> true)
+				.filter(filtro.getDataLimite() != null ? c -> c.getDataLimite().equals(filtro.getDataLimite()) : c -> true)
+				.filter(filtro.getLocalizacao() != null ? c -> c.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : c -> true)
+				.collect(Collectors.toList());
 
-		List<Contrato> contratos = contratoRepository.findAll();
-		
 		return ResponseEntity.ok(contratos);
 	}
 

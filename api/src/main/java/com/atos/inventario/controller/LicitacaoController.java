@@ -1,8 +1,6 @@
 package com.atos.inventario.controller;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atos.inventario.atosdto.FiltroPesquisaDTO;
 import com.atos.inventario.atosdto.LicitacaoDTO;
 import com.atos.inventario.enums.UnidadeProdutoraEnum;
 import com.atos.inventario.model.ClassificacaoDocumental;
@@ -46,8 +45,8 @@ public class LicitacaoController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-	@GetMapping("/licitacoes")
-	public ResponseEntity<List<Licitacao>> listarLicitacao(@RequestBody(required=false) Map<String, String> filtro) {
+	@PostMapping("/licitacoes")
+	public ResponseEntity<List<Licitacao>> listarLicitacao(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 
 		// TODO organizar os filtros
 		/* 
@@ -63,19 +62,12 @@ public class LicitacaoController {
 		 * 
 		 * */
 		
-//		List<Licitacao> licitacoes = licitacaoRepository.findAll().stream()
-//				.filter(l -> l.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
-//						&& l.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
-//						&& l.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer
-//								.parseInt(filtro.get("codigoClassificacaoDocumental"))
-//						&& l.getDataLimite().equals(new Date(filtro.get("dataLimite")))
-//						&& l.getNumeroProcessoLicitatorio().equals(filtro.get("numeroProcessoLicitatorio"))
-//						&& l.getNumeroPec().equals(filtro.get("numeroPec"))
-//						&& l.getObjetoResumido().equals(filtro.get("objetoResumido"))
-//						&& l.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
-//				.collect(Collectors.toList());
-		
-		List<Licitacao> licitacoes = licitacaoRepository.findAll();
+		List<Licitacao> licitacoes = licitacaoRepository.findAll().stream()
+				.filter(filtro.getUnidadeProdutora() != null ? l -> l.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : l -> true)
+				.filter(filtro.getClassificacaoDocumental() != null ? l -> l.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : l -> true)
+				.filter(filtro.getDataLimite() != null ? l -> l.getDataLimite().equals(filtro.getDataLimite()) : l -> true)
+				.filter(filtro.getLocalizacao() != null ? l -> l.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : l -> true)
+				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(licitacoes);
 	}

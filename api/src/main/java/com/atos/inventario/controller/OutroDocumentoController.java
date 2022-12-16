@@ -1,5 +1,22 @@
 package com.atos.inventario.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.atos.inventario.atosdto.FiltroPesquisaDTO;
+
 import com.atos.inventario.atosdto.OutroDocumentoDTO;
 import com.atos.inventario.enums.UnidadeProdutoraEnum;
 import com.atos.inventario.model.ClassificacaoDocumental;
@@ -10,16 +27,6 @@ import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
 import com.atos.inventario.repositories.EmpregadoRepository;
 import com.atos.inventario.repositories.OutroDocumentoRepository;
 import com.atos.inventario.services.LocalizacaoService;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -53,17 +60,13 @@ public class OutroDocumentoController {
 		 * 
 		 * */
 		
-//		List<OutroDocumento> outrosDocumentos = outroDocumentoRepository.findAll().stream()
-//				.filter(o -> o.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
-//						&& o.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
-//						&& o.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer
-//								.parseInt(filtro.get("codigoClassificacaoDocumental"))
-//						&& o.getDataLimite().equals(new Date(filtro.get("dataLimite")))
-//						&& o.getObjetoResumido().equals(filtro.get("objetoResumido"))
-//						&& o.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
-//				.collect(Collectors.toList());
+		List<OutroDocumento> outrosDocumentos = outroDocumentoRepository.findAll().stream()
+				.filter(filtro.getUnidadeProdutora() != null ? o -> o.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : o -> true)
+				.filter(filtro.getClassificacaoDocumental() != null ? o -> o.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : o -> true)
+				.filter(filtro.getDataLimite() != null ? o -> o.getDataLimite().equals(filtro.getDataLimite()) : o -> true)
+				.filter(filtro.getLocalizacao() != null ? o -> o.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : o -> true)
+				.collect(Collectors.toList());
     	
-        List<OutroDocumento> outrosDocumentos = outroDocumentoRepository.findAll();
         return ResponseEntity.ok(outrosDocumentos);
     }
     

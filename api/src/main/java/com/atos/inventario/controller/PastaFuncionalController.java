@@ -1,6 +1,22 @@
 package com.atos.inventario.controller;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.atos.inventario.atosdto.FiltroPesquisaDTO;
 import com.atos.inventario.atosdto.PastaFuncionalDTO;
 import com.atos.inventario.enums.UnidadeProdutoraEnum;
 import com.atos.inventario.model.ClassificacaoDocumental;
@@ -11,16 +27,6 @@ import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
 import com.atos.inventario.repositories.EmpregadoRepository;
 import com.atos.inventario.repositories.PastaFuncionalRepository;
 import com.atos.inventario.services.LocalizacaoService;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -39,8 +45,8 @@ public class PastaFuncionalController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-    @GetMapping(value = "/pastas")
-    public ResponseEntity<List<PastaFuncional>> list(@RequestBody(required=false) Map<String, String> filtro) {
+    @PostMapping(value = "/pastas")
+    public ResponseEntity<List<PastaFuncional>> list(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 
 		// TODO organizar os filtros
 		/* 
@@ -55,17 +61,13 @@ public class PastaFuncionalController {
 		 * 
 		 * */
 		
-//		List<PastaFuncional> pastasFuncionais = pastaFuncionalRepository.findAll().stream()
-//				.filter(p -> p.getDocumentoEncaminhamento().equals(filtro.get("documentoEncaminhamento"))
-//						&& p.getUnidadeProdutora().getSigla().equals(filtro.get("unidadeProdutora"))
-//						&& p.getClassificacaoDocumental().getCodigoClassificacaoDocumental() == Integer
-//								.parseInt(filtro.get("codigoClassificacaoDocumental"))
-//						&& p.getDataLimite().equals(new Date(filtro.get("dataLimite")))
-//						&& p.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.get("idLocalizacao")))
-//				.collect(Collectors.toList());
+		List<PastaFuncional> pastasFuncionais = pastaFuncionalRepository.findAll().stream()
+				.filter(filtro.getUnidadeProdutora() != null ? p -> p.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : p -> true)
+				.filter(filtro.getClassificacaoDocumental() != null ? p -> p.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : p -> true)
+				.filter(filtro.getDataLimite() != null ? p -> p.getDataLimite().equals(filtro.getDataLimite()) : p -> true)
+				.filter(filtro.getLocalizacao() != null ? p -> p.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : p -> true)
+				.collect(Collectors.toList());
     	
-        List<PastaFuncional> pastasFuncionais = pastaFuncionalRepository.findAll();
-
         return ResponseEntity.ok(pastasFuncionais);
     }
     
