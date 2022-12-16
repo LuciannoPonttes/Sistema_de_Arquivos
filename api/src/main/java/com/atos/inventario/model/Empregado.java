@@ -39,6 +39,9 @@ public class Empregado implements UserDetails, Serializable {
 	private String email;
 	private Date dataLogin;
 	private String departamento;
+
+//	@Column(columnDefinition="boolean default true")
+	private boolean ativo = true;
 	
 	@ManyToMany
 	@JoinTable(name = "TB_ROLES_EMPREGADO",
@@ -96,6 +99,15 @@ public class Empregado implements UserDetails, Serializable {
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
 	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	@Override
 	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
