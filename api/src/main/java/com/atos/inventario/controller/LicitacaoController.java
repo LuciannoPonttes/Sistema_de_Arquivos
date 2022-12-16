@@ -63,7 +63,7 @@ public class LicitacaoController {
 		 * */
 		
 		List<Licitacao> licitacoes = licitacaoRepository.findAll().stream()
-				.filter(filtro.getUnidadeProdutora() != null ? l -> l.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : l -> true)
+				.filter(filtro.getUnidadeProdutora() != null ? l -> l.getUnidadeProdutora().getCodigo().equals(filtro.getUnidadeProdutora()) : l -> true)
 				.filter(filtro.getClassificacaoDocumental() != null ? l -> l.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : l -> true)
 				.filter(filtro.getDataLimite() != null ? l -> l.getDataLimite().equals(filtro.getDataLimite()) : l -> true)
 				.filter(filtro.getLocalizacao() != null ? l -> l.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : l -> true)

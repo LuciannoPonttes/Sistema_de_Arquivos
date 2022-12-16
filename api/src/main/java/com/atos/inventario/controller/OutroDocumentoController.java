@@ -46,7 +46,7 @@ public class OutroDocumentoController {
 	LocalizacaoService localizacaoService;
 
     @GetMapping(value = "/outros")
-    public ResponseEntity<List<OutroDocumento>> list(@RequestBody(required=false) Map<String, String> filtro) {
+    public ResponseEntity<List<OutroDocumento>> list(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 
 		// TODO organizar os filtros
 		/* 
@@ -61,7 +61,7 @@ public class OutroDocumentoController {
 		 * */
 		
 		List<OutroDocumento> outrosDocumentos = outroDocumentoRepository.findAll().stream()
-				.filter(filtro.getUnidadeProdutora() != null ? o -> o.getUnidadeProdutora().getIdUnidadeProdutora().equals(filtro.getUnidadeProdutora()) : o -> true)
+				.filter(filtro.getUnidadeProdutora() != null ? o -> o.getUnidadeProdutora().getCodigo().equals(filtro.getUnidadeProdutora()) : o -> true)
 				.filter(filtro.getClassificacaoDocumental() != null ? o -> o.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : o -> true)
 				.filter(filtro.getDataLimite() != null ? o -> o.getDataLimite().equals(filtro.getDataLimite()) : o -> true)
 				.filter(filtro.getLocalizacao() != null ? o -> o.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : o -> true)
