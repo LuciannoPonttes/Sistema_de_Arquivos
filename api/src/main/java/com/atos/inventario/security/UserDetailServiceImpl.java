@@ -30,7 +30,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
 		final List<GrantedAuthority> grantedAuths = new ArrayList<>();
         grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
         
-        Empregado empregado = empregadoRepository.findByMatriculaSenha(matricula, "senha").orElseThrow(() -> new UsernameNotFoundException("Empregado não Encontrado" + matricula));  
+        Empregado empregado = empregadoRepository.findByMatricula(matricula).orElseThrow(() -> new UsernameNotFoundException("Empregado não Encontrado" + matricula));  
         
         return new User(empregado.getMatricula(), "senha",true,true,true,true, grantedAuths );
 	}

@@ -24,9 +24,14 @@ public class EmpregadoController {
 	private EmpregadoRepository empregadoRepository;
 
 	@GetMapping(value = "/empregado" )
-	public Optional<Empregado> buscarEmpregado(@RequestParam String matricula, @RequestParam String senha) {
-
-		return empregadoRepository.findByMatriculaSenha(matricula, senha);
+	public ResponseEntity<Empregado> buscarEmpregado(@RequestParam String matricula, @RequestParam String senha) {
+		Optional<Empregado> empregado = empregadoRepository.findByMatriculaSenha(matricula, senha);
+		if (empregado.isPresent()) {
+			return ResponseEntity.ok(empregado.get());
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	
 	}
 
 	@PostMapping(value = "/empregados")
@@ -36,18 +41,11 @@ public class EmpregadoController {
 				.filter( filtro.getNome() != null ? e -> e.getNome().toLowerCase().contains(filtro.getNome().toLowerCase()) : e -> true )
 				.filter( filtro.getMatricula() != null ? e -> e.getMatricula().toLowerCase().contains(filtro.getMatricula().toLowerCase()) : e -> true)
 				.filter( filtro.getEmail() != null ? e -> e.getEmail().toLowerCase().contains(filtro.getEmail().toLowerCase()) : e -> true )
-				.filter( filtro.getUnidadeDepartamento() != null ? e -> e.getDepartamento().toLowerCase().contains(filtro.getUnidadeDepartamento().toLowerCase()) : e -> true )
+				.filter( filtro.getUnidadeDepartamento() != null ? e -> e.getDepartamentoDesc().toLowerCase().contains(filtro.getUnidadeDepartamento().toLowerCase()) : e -> true )
 				.collect(Collectors.toList());
 
-		for (Empregado emp : empregados){
-			listEmpregados.add(new EmpregadoDTO(
-				emp.getIdEmpregado(),
-				emp.getNome(),
-				emp.getMatricula(),
-				emp.getEmail(),
-				emp.getDepartamento()
-			));
-		}
+		ModelMapper mapper = new ModelMapper();
+		listEmpregados = mapper.map(empregados, List.of(Empregado.class).getClass());
 		
 		return ResponseEntity.ok(listEmpregados);
 	}
