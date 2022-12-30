@@ -7,19 +7,33 @@ import java.util.stream.Collectors;
 
 import com.atos.inventario.atosdto.EmpregadoDTO;
 import com.atos.inventario.atosdto.FiltroPesquisaEmpregadoDTO;
+import com.atos.inventario.atosdto.LoginRequestDTO;
+import com.atos.inventario.atosdto.LoginResponseDTO;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import com.atos.inventario.model.Empregado;
 import com.atos.inventario.repositories.EmpregadoRepository;
+import com.atos.inventario.security.JwtUtils;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
 public class EmpregadoController {
 
+	@Autowired
+	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	JwtUtils jwtUtils;
+	
 	@Autowired
 	private EmpregadoRepository empregadoRepository;
 
@@ -72,4 +86,22 @@ public class EmpregadoController {
 
 		return ResponseEntity.noContent().build();
 	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDTO loginRequest) {
+
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getMatricula(), loginRequest.getSenha()));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+		
+		Empregado empregado = (Empregado) authentication.getPrincipal();		
+		List<String> roles = empregado.getAuthorities().stream()
+				.map(item -> item.getAuthority())
+				.collect(Collectors.toList());
+
+		return ResponseEntity.ok(new LoginResponseDTO(jwt));
+	}
+
 }	

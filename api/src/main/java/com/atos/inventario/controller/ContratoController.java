@@ -44,8 +44,7 @@ public class ContratoController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 	
-	@PostMapping("/contratos")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/contrato")
 	public ResponseEntity<List<Contrato>> listarContrato(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 		
 		// TODO organizar os filtros
@@ -73,7 +72,7 @@ public class ContratoController {
 		return ResponseEntity.ok(contratos);
 	}
 
-	@PostMapping("/cadastrarContrato")
+	@PostMapping("/contrato/cadastrar")
 	public ResponseEntity<Contrato> cadastrarContrato(@RequestBody ContratoDTO contratoDto) {
 		ModelMapper mapper = new ModelMapper();
 		

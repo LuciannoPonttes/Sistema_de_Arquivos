@@ -32,7 +32,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
         
         Empregado empregado = empregadoRepository.findByMatricula(matricula).orElseThrow(() -> new UsernameNotFoundException("Empregado não Encontrado" + matricula));  
         
-        return new User(empregado.getMatricula(), "senha",true,true,true,true, grantedAuths );
+        return empregado;
 	}
 
 }

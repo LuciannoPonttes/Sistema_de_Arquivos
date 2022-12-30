@@ -8,6 +8,12 @@ public class LoginResponseDTO implements Serializable{
 	
 	private String token;
 
+	
+	public LoginResponseDTO(String token) {
+		super();
+		this.token = token;
+	}
+
 	public String getToken() {
 		return token;
 	}

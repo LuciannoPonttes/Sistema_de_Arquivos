@@ -40,8 +40,10 @@ public class WebSecurityConfig {
         	.and()
         	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         	.and()
-        	.authorizeRequests().antMatchers("/api/empregado").permitAll()
-        	.antMatchers("/api/**").permitAll()
+        	.authorizeRequests()
+        	.antMatchers("/api/login").permitAll()
+        	.antMatchers("/api/contrato/**").permitAll()
+        	.antMatchers("/api/**").hasRole("USER")
         	.anyRequest().authenticated();
 		
 		http.authenticationProvider(authenticationProvider());
