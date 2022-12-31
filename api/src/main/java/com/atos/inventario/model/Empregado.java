@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +22,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.atos.inventario.enums.DepartamentoEmpregadoEnum;
@@ -47,7 +51,7 @@ public class Empregado implements UserDetails, Serializable {
 	@Column(nullable = false, unique = true)
 	private DepartamentoEmpregadoEnum departamento;
   
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinTable(name = "TB_ROLES_EMPREGADO",
 		joinColumns = @JoinColumn(name = "idEmpregado"),
 		inverseJoinColumns = @JoinColumn(name = "roleId"))
@@ -119,11 +123,8 @@ public class Empregado implements UserDetails, Serializable {
 	}
 	
 	@Override
-	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<RoleEmpregado> rolesEmpregado = new ArrayList<RoleEmpregado>();
-		rolesEmpregado.add(new RoleEmpregado());
-		return rolesEmpregado;
+		return roles.stream().map(x -> new SimpleGrantedAuthority(x.getAuthority())).collect(Collectors.toList());
 	}
 	@Override
 	@JsonIgnore

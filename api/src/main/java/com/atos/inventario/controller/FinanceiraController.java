@@ -45,7 +45,7 @@ public class FinanceiraController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-	@PostMapping("/financeiras")
+	@PostMapping("/financeira/listar")
 	public ResponseEntity<List<Financeira>> listarFinanceira(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 		
 		// TODO organizar os filtros
@@ -71,7 +71,7 @@ public class FinanceiraController {
 		return ResponseEntity.ok(financeiras);
 	}
 
-	@PostMapping("/cadastrarFinanceira")
+	@PostMapping("/financeira/cadastrar")
 	public ResponseEntity<Financeira> cadastrarFinanceira(@RequestBody FinanceiraDTO financeiraDto) {
 		ModelMapper mapper = new ModelMapper();
 		
@@ -109,15 +109,20 @@ public class FinanceiraController {
 	public ResponseEntity<Void> deletarFinanceira(@PathVariable long id) {
 
 		Financeira financeira = financeiraRepository.findById(id);
-		financeiraRepository.delete(financeira);
-
-		return ResponseEntity.noContent().build();
-
+		if (financeira != null) {
+			financeiraRepository.delete(financeira);
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@PutMapping(value = "/financeira/{id}")
-	public ResponseEntity<Financeira> editarFinanceira(@RequestBody Financeira financeira) {
-
+	public ResponseEntity<Financeira> editarFinanceira(@PathVariable long id, @RequestBody FinanceiraDTO financeiraDto) {
+		ModelMapper mapper = new ModelMapper();
+		
+		Financeira financeira = financeiraRepository.findById(id);;
+		financeira = mapper.map(financeiraDto, Financeira.class);
 		Financeira financeiraRetorno = financeiraRepository.save(financeira);
 
 		return ResponseEntity.ok(financeiraRetorno);

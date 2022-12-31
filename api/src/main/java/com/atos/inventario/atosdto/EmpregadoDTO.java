@@ -11,13 +11,14 @@ public class EmpregadoDTO implements Serializable{
 	private String nome;
 	private String email;
 	private String departamento;
+	private Boolean ativo;
 
-	public EmpregadoDTO(Long idEmpregado, String nome, String matricula, String email, String departamento) {
+	public Long getIdEmpregado() {
+		return idEmpregado;
+	}
+
+	public void setIdEmpregado(Long idEmpregado) {
 		this.idEmpregado = idEmpregado;
-		this.nome = nome;
-		this.matricula = matricula;
-		this.email = email;
-		this.departamento = departamento;
 	}
 
 	public String getMatricula() {
@@ -52,11 +53,13 @@ public class EmpregadoDTO implements Serializable{
 		this.departamento = departamento;
 	}
 
-	public Long getIdEmpregado() {
-		return idEmpregado;
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setIdEmpregado(Long idEmpregado) {
-		this.idEmpregado = idEmpregado;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
+	
+	
 }

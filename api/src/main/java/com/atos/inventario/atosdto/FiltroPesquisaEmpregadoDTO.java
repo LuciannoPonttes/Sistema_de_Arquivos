@@ -6,7 +6,8 @@ public class FiltroPesquisaEmpregadoDTO {
 	private String matricula;
 	private String email;
 	private String unidadeDepartamento;
-
+    private Boolean ativo;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -38,5 +39,15 @@ public class FiltroPesquisaEmpregadoDTO {
 	public void setUnidadeDepartamento(String unidadeDepartamento) {
 		this.unidadeDepartamento = unidadeDepartamento;
 	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+	
+	
 
 }

@@ -45,7 +45,7 @@ public class LicitacaoController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-	@PostMapping("/licitacoes")
+	@PostMapping("/licitacao/listar")
 	public ResponseEntity<List<Licitacao>> listarLicitacao(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 
 		// TODO organizar os filtros
@@ -72,7 +72,7 @@ public class LicitacaoController {
 		return ResponseEntity.ok(licitacoes);
 	}
 
-	@PostMapping("/cadastrarLicitacao")
+	@PostMapping("/licitacao/cadastrar")
 	public ResponseEntity<Licitacao> cadastrarLicitacao(@RequestBody LicitacaoDTO licitacaoDto) {
 		
 		ModelMapper mapper = new ModelMapper();
@@ -111,15 +111,20 @@ public class LicitacaoController {
 	public ResponseEntity<Void> deletarLicitacao(@PathVariable long id) {
 
 		Licitacao licitacao = licitacaoRepository.findById(id);
-		licitacaoRepository.delete(licitacao);
-
-		return ResponseEntity.noContent().build();
-
+		if (licitacao != null) {
+			licitacaoRepository.delete(licitacao);
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@PutMapping(value = "/licitacao/{id}")
-	public ResponseEntity<Licitacao> editarLicitacao(@RequestBody Licitacao licitacao) {
-
+	public ResponseEntity<Licitacao> editarLicitacao(@PathVariable long id, @RequestBody LicitacaoDTO licitacaoDto) {
+		ModelMapper mapper = new ModelMapper();
+		
+		Licitacao licitacao = licitacaoRepository.findById(id);
+		licitacao = mapper.map(licitacaoDto, Licitacao.class);
 		Licitacao licitacaoRetorno = licitacaoRepository.save(licitacao);
 
 		return ResponseEntity.ok(licitacaoRetorno);

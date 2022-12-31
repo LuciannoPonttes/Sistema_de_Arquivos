@@ -13,14 +13,14 @@ public class JwtUtils {
 
 	private String jwtSecret="Atos";
 
-	private int jwtExpirationMs = 5 * 60 * 60;
+	private long jwtExpirationMs = 5 * 60 * 60 * 1000;
 
 	public String generateJwtToken(Authentication authentication) {
 
 		Empregado userPrincipal = (Empregado) authentication.getPrincipal();
 
 		return Jwts.builder()
-				.setSubject((userPrincipal.getUsername()))
+				.setSubject((userPrincipal.getMatricula()))
 				.setIssuedAt(new Date())
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret)
@@ -36,15 +36,15 @@ public class JwtUtils {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
 			return true;
 		} catch (SignatureException e) {
-			//console.error("Invalid JWT signature: {}", e.getMessage());
+			System.out.println("Invalid JWT signature: {}" + e.getMessage());
 		} catch (MalformedJwtException e) {
-			//logger.error("Invalid JWT token: {}", e.getMessage());
+			System.out.println("Invalid JWT token: {}"+ e.getMessage());
 		} catch (ExpiredJwtException e) {
-			//logger.error("JWT token is expired: {}", e.getMessage());
+			System.out.println("JWT token is expired: {}"+ e.getMessage());
 		} catch (UnsupportedJwtException e) {
-			//logger.error("JWT token is unsupported: {}", e.getMessage());
+			System.out.println("JWT token is unsupported: {}"+ e.getMessage());
 		} catch (IllegalArgumentException e) {
-			//logger.error("JWT claims string is empty: {}", e.getMessage());
+			System.out.println("JWT claims string is empty: {}"+ e.getMessage());
 		}
 
 		return false;

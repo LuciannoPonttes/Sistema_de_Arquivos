@@ -44,7 +44,7 @@ public class ContratoController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 	
-	@PostMapping("/contrato")
+	@PostMapping("/contrato/listar")
 	public ResponseEntity<List<Contrato>> listarContrato(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 		
 		// TODO organizar os filtros
@@ -110,15 +110,19 @@ public class ContratoController {
 	public ResponseEntity<Void> deletarContrato(@PathVariable long id) {
 
 		Contrato contrato = contratoRepository.findById(id);
-		contratoRepository.delete(contrato);
-
-		return ResponseEntity.noContent().build();
-
+		if (contrato != null) {
+			contratoRepository.delete(contrato);
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@PutMapping(value = "/contrato/{id}")
-	public ResponseEntity<Contrato> editarContrato(@RequestBody Contrato contrato) {
-
+	public ResponseEntity<Contrato> editarContrato(@PathVariable long id, @RequestBody ContratoDTO contratoDto) {
+		ModelMapper mapper = new ModelMapper();
+		Contrato contrato = contratoRepository.findById(id);
+	    contrato = mapper.map(contratoDto, Contrato.class);
 		Contrato contratoRetorno = contratoRepository.save(contrato);
 
 		return ResponseEntity.ok(contratoRetorno);

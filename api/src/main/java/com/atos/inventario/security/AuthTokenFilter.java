@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.atos.inventario.model.Empregado;
+
 import org.springframework.util.StringUtils;
 
 @Component
@@ -32,12 +34,17 @@ public class AuthTokenFilter extends OncePerRequestFilter{
 
 		try {
 			String jwt = parseJwt(request);
+			System.out.println("jwt:"+jwt);
 			if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
 				String username = jwtUtils.getUserNameFromJwtToken(jwt);
+				System.out.println("username:"+username);
+				
+				//Once we get the token validate it.
+				Empregado userDetails = (Empregado) userDetailsService.loadUserByUsername(username);
+				
+				UsernamePasswordAuthenticationToken authentication = 
+					new UsernamePasswordAuthenticationToken(userDetails.getMatricula(), userDetails.getSenha(), userDetails.getAuthorities());
 
-				UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-						userDetails, null, userDetails.getAuthorities());
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
 				SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -47,6 +54,7 @@ public class AuthTokenFilter extends OncePerRequestFilter{
 		}
 
 		filterChain.doFilter(request, response);
+
 	}
 
 	private String parseJwt(HttpServletRequest request) {
