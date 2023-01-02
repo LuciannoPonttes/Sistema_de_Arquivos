@@ -44,10 +44,7 @@ public class WebSecurityConfig {
         	.and()
         	.authorizeRequests()
         	.antMatchers("/api/login").permitAll()
-        	.antMatchers("/api/empregado").hasAuthority("ADMIN")
-        	.antMatchers("/api/empregados").hasAuthority("ADMIN")
-        	.antMatchers("/api/cadastrarEmpregado").hasAuthority("ADMIN")
-        	.antMatchers("/api/desativarEmpregado").hasAuthority("ADMIN")
+        	.antMatchers("/api/empregado/**").hasAuthority("ADMIN")
         	.anyRequest().authenticated();
 		
 		http.authenticationProvider(authenticationProvider());

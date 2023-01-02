@@ -103,6 +103,8 @@ public class EmpregadoController {
 		if (empregado.isPresent()){
 			empregado.get().setAtivo(true);
 			empregadoRepository.save(empregado.get());
+		} else {
+			return ResponseEntity.notFound().build();
 		}
 
 		return ResponseEntity.noContent().build();
@@ -116,6 +118,8 @@ public class EmpregadoController {
 		if (empregado.isPresent()){
 			empregado.get().setAtivo(false);
 			empregadoRepository.save(empregado.get());
+		} else {
+			return ResponseEntity.notFound().build();
 		}
 
 		return ResponseEntity.noContent().build();
@@ -125,7 +129,6 @@ public class EmpregadoController {
 	public ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDTO loginRequest) {
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequest.getMatricula(), loginRequest.getSenha(),new ArrayList<>());
 		Authentication authentication = authenticationManager.authenticate(authenticationToken);
-		
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
