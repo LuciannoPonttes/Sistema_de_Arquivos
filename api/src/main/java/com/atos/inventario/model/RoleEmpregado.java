@@ -2,20 +2,20 @@ package com.atos.inventario.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
 @Table(name = "TB_ROLES_EMPREGADO")
-public class RoleEmpregado implements Serializable {
+public class RoleEmpregado implements GrantedAuthority, Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idRoleEmpregado;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idRoleEmpregado;
 	
 	private String nomeRole;
 
@@ -35,7 +35,9 @@ public class RoleEmpregado implements Serializable {
 		this.nomeRole = nomeRole;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	@Override
+	public String getAuthority() {
+		return nomeRole;
 	}
+
 }

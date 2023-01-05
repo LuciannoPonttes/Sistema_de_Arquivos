@@ -2,11 +2,7 @@ package com.atos.inventario.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TB_LOCALIZACAO")
@@ -15,15 +11,15 @@ public class Localizacao implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idLocalizacao;
 	
-	private String endereco;
-	private String predio;
-	private String sala;
-	private String bloco;
-	private String posicao;
-	private String numeroCaixa;
+	private String endereco="";
+	private String predio="";
+	private String sala="";
+	private String bloco="";
+	private String posicao="";
+	private String numeroCaixa="";
 	
 	public long getIdLocalizacao() {
 		return idLocalizacao;
@@ -60,9 +56,6 @@ public class Localizacao implements Serializable {
 	}
 	public void setPosicao(String posicao) {
 		this.posicao = posicao;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	public String getNumeroCaixa() {
 		return numeroCaixa;

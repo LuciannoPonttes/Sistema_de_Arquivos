@@ -16,14 +16,15 @@ public class UnidadePagamento implements Serializable  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idUnidadePagamento;
+	private Long idUnidadePagamento;
 	private String sigla;
-
-	public long getIdUnidadePagamento() {
+    private String descricao;
+	
+	public Long getIdUnidadePagamento() {
 		return idUnidadePagamento;
 	}
 
-	public void setIdUnidadePagamento(long idUnidadePagamento) {
+	public void setIdUnidadePagamento(Long idUnidadePagamento) {
 		this.idUnidadePagamento = idUnidadePagamento;
 	}
 
@@ -35,8 +36,13 @@ public class UnidadePagamento implements Serializable  {
 		this.sigla = sigla;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getDescricao() {
+		return descricao;
 	}
-	
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
 }

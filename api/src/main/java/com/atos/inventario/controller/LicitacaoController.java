@@ -1,7 +1,9 @@
 package com.atos.inventario.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,8 +16,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atos.inventario.atosdto.FiltroPesquisaDTO;
+import com.atos.inventario.atosdto.LicitacaoDTO;
+import com.atos.inventario.enums.UnidadeProdutoraEnum;
+import com.atos.inventario.model.ClassificacaoDocumental;
+import com.atos.inventario.model.Empregado;
 import com.atos.inventario.model.Licitacao;
+import com.atos.inventario.model.Localizacao;
+import com.atos.inventario.repositories.ClassificacaoDocumentalRepository;
+import com.atos.inventario.repositories.EmpregadoRepository;
 import com.atos.inventario.repositories.LicitacaoRepository;
+import com.atos.inventario.services.LocalizacaoService;
 
 @RestController
 @RequestMapping("/api")
@@ -24,17 +35,61 @@ public class LicitacaoController {
 
 	@Autowired
 	LicitacaoRepository licitacaoRepository;
+	
+	@Autowired
+	ClassificacaoDocumentalRepository classificacaoDocumentalRepository;
+	
+	@Autowired
+	EmpregadoRepository empregadoRepository;
+	
+	@Autowired
+	LocalizacaoService localizacaoService;
 
-	@GetMapping("/licitacoes")
-	public ResponseEntity<List<Licitacao>> listarLicitacao() {
+	@PostMapping("/licitacao/listar")
+	public ResponseEntity<List<Licitacao>> listarLicitacao(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 
-		List<Licitacao> licitacoes = licitacaoRepository.findAll();
+		// TODO organizar os filtros
+		/* 
+		 * Licitacao.documentoEncaminhamento 
+		 * Licitacao.unidadeProdutora
+		 * Licitacao.classificacaoDocumental
+		 * Licitacao.dataLimite
+ 		 * Licitacao.numeroProcessoLicitatorio
+ 		 * Licitacao.numeroPec
+		 * Licitacao.objetoResumido
+		 * Licitacao.localizacao
+		 * Empregado.departamento
+		 * 
+		 * */
+		
+		List<Licitacao> licitacoes = licitacaoRepository.findAll().stream()
+				.filter(filtro.getUnidadeProdutora() != null ? l -> l.getUnidadeProdutora().getCodigo().equals(filtro.getUnidadeProdutora()) : l -> true)
+				.filter(filtro.getClassificacaoDocumental() != null ? l -> l.getClassificacaoDocumental().getCodigoClassificacaoDocumental().equals(filtro.getClassificacaoDocumental()) : l -> true)
+				.filter(filtro.getDataLimite() != null ? l -> l.getDataLimite().equals(filtro.getDataLimite()) : l -> true)
+				.filter(filtro.getLocalizacao() != null ? l -> l.getLocalizacao().getIdLocalizacao() == Long.parseLong(filtro.getLocalizacao()) : l -> true)
+				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(licitacoes);
 	}
 
-	@PostMapping("/cadastrarLicitacao")
-	public ResponseEntity<Licitacao> cadastrarLicitacao(@RequestBody Licitacao licitacao) {
+	@PostMapping("/licitacao/cadastrar")
+	public ResponseEntity<Licitacao> cadastrarLicitacao(@RequestBody LicitacaoDTO licitacaoDto) {
+		
+		ModelMapper mapper = new ModelMapper();
+		
+		Licitacao licitacao = mapper.map(licitacaoDto, Licitacao.class);
+		
+		UnidadeProdutoraEnum unidadeProdutora = UnidadeProdutoraEnum.getByCodigo(licitacaoDto.getUnidadeProdutoraId());
+		licitacao.setUnidadeProdutora(unidadeProdutora);
+		
+		Empregado empregado = empregadoRepository.findById(licitacaoDto.getEmpregadoId()).get();
+		licitacao.setEmpregado(empregado);
+		
+		ClassificacaoDocumental classificacaoDocumental = classificacaoDocumentalRepository.findById(licitacaoDto.getClassificacaoDocumentalId()).get();
+		licitacao.setClassificacaoDocumental(classificacaoDocumental);
+		
+		Localizacao localizacao = localizacaoService.validaLocalizacao(licitacaoDto.getLocalizacao());
+		licitacao.setLocalizacao(localizacao);
 
 		Licitacao licitacaoRetorno = licitacaoRepository.save(licitacao);
 
@@ -45,23 +100,31 @@ public class LicitacaoController {
 	public ResponseEntity<Licitacao> buscarLicitacao(@PathVariable long id) {
 
 		Licitacao licitacao = licitacaoRepository.findById(id);
-
-		return ResponseEntity.ok(licitacao);
+		if (licitacao != null) {
+			return ResponseEntity.ok(licitacao);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@DeleteMapping(value = "/licitacao/{id}")
 	public ResponseEntity<Void> deletarLicitacao(@PathVariable long id) {
 
 		Licitacao licitacao = licitacaoRepository.findById(id);
-		licitacaoRepository.delete(licitacao);
-
-		return ResponseEntity.noContent().build();
-
+		if (licitacao != null) {
+			licitacaoRepository.delete(licitacao);
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@PutMapping(value = "/licitacao/{id}")
-	public ResponseEntity<Licitacao> editarLicitacao(@RequestBody Licitacao licitacao) {
-
+	public ResponseEntity<Licitacao> editarLicitacao(@PathVariable long id, @RequestBody LicitacaoDTO licitacaoDto) {
+		ModelMapper mapper = new ModelMapper();
+		
+		Licitacao licitacao = licitacaoRepository.findById(id);
+		licitacao = mapper.map(licitacaoDto, Licitacao.class);
 		Licitacao licitacaoRetorno = licitacaoRepository.save(licitacao);
 
 		return ResponseEntity.ok(licitacaoRetorno);

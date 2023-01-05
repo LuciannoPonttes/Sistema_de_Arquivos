@@ -15,31 +15,21 @@ public class ClassificacaoDocumental implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int codigoClassificacaoDocumental;
+	private Long codigoClassificacaoDocumental;
 	
-	private String classificacaoDocumental;
 	private String descricao;
 	
-	public int getCodigoClassificacaoDocumental() {
+	public Long getCodigoClassificacaoDocumental() {
 		return codigoClassificacaoDocumental;
 	}
-	public void setCodigoClassificacaoDocumental(int codigoClassificacaoDocumental) {
+	public void setCodigoClassificacaoDocumental(Long codigoClassificacaoDocumental) {
 		this.codigoClassificacaoDocumental = codigoClassificacaoDocumental;
-	}
-	public String getClassificacaoDocumental() {
-		return classificacaoDocumental;
-	}
-	public void setClassificacaoDocumental(String classificacaoDocumental) {
-		this.classificacaoDocumental = classificacaoDocumental;
 	}
 	public String getDescricao() {
 		return descricao;
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	
 	
