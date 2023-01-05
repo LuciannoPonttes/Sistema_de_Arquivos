@@ -45,7 +45,7 @@ public class OutroDocumentoController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-    @GetMapping(value = "/outros")
+    @GetMapping(value = "/outro/listar")
     public ResponseEntity<List<OutroDocumento>> list(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 
 		// TODO organizar os filtros
@@ -70,7 +70,7 @@ public class OutroDocumentoController {
         return ResponseEntity.ok(outrosDocumentos);
     }
     
-    @PostMapping(value = "/cadastrarOutro")
+    @PostMapping(value = "/outro/cadastrar")
     public ResponseEntity<OutroDocumento> save(@RequestBody OutroDocumentoDTO outroDocumentoDto) {
     	
     	ModelMapper mapper = new ModelMapper();
@@ -104,8 +104,14 @@ public class OutroDocumentoController {
     
     @DeleteMapping(value = "/outro/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
-        outroDocumentoRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+    	OutroDocumento result = outroDocumentoRepository.findById(id);
+       	if ( result != null) {
+       		outroDocumentoRepository.delete(result);
+       		return ResponseEntity.noContent().build();
+    	} else {
+    		return ResponseEntity.notFound().build();
+    	}
+        
     }
 
 }

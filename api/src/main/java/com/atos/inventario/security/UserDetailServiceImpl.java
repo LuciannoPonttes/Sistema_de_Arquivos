@@ -1,11 +1,12 @@
 package com.atos.inventario.security;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,20 +20,13 @@ import com.atos.inventario.repositories.EmpregadoRepository;
 @Transactional
 public class UserDetailServiceImpl implements UserDetailsService{
 
-	final EmpregadoRepository empregadoRepository;
-	
-	public UserDetailServiceImpl(EmpregadoRepository empregadoRepository) {
-		this.empregadoRepository = empregadoRepository;
-	}
+	@Autowired
+	private EmpregadoRepository empregadoRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String matricula) throws UsernameNotFoundException {
-		final List<GrantedAuthority> grantedAuths = new ArrayList<>();
-        grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-        
-        Empregado empregado = empregadoRepository.findByMatriculaSenha(matricula, "senha").orElseThrow(() -> new UsernameNotFoundException("Empregado não Encontrado" + matricula));  
-        
-        return new User(empregado.getMatricula(), "senha",true,true,true,true, grantedAuths );
+	public UserDetails loadUserByUsername(String matricula) throws UsernameNotFoundException {       
+        Empregado empregado = empregadoRepository.findByMatricula(matricula).orElseThrow(() -> new UsernameNotFoundException("Empregado não Encontrado" + matricula));
+        return empregado;
 	}
 
 }

@@ -45,7 +45,7 @@ public class PastaFuncionalController {
 	@Autowired
 	LocalizacaoService localizacaoService;
 
-    @PostMapping(value = "/pastas")
+    @PostMapping(value = "/pasta/listar")
     public ResponseEntity<List<PastaFuncional>> list(@RequestBody(required=false) FiltroPesquisaDTO filtro) {
 
 		// TODO organizar os filtros
@@ -71,7 +71,7 @@ public class PastaFuncionalController {
         return ResponseEntity.ok(pastasFuncionais);
     }
     
-    @PostMapping(value="/cadastrarPasta")
+    @PostMapping(value="/pasta/cadastrar")
     public ResponseEntity<PastaFuncional> cadastrar(@RequestBody PastaFuncionalDTO pastaFuncionalDto){
     	
 		ModelMapper mapper = new ModelMapper();
@@ -106,7 +106,12 @@ public class PastaFuncionalController {
 
     @DeleteMapping(value="/pasta/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
-        pastaFuncionalRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+    	PastaFuncional result = pastaFuncionalRepository.findById(id);
+    	if (result != null) {
+    		pastaFuncionalRepository.delete(result);
+    		return ResponseEntity.noContent().build();
+    	} else {
+    		return ResponseEntity.notFound().build();
+    	}
     }
 }

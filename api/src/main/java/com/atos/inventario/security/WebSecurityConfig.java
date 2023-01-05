@@ -1,42 +1,80 @@
 package com.atos.inventario.security;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig {
-   
+
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private AuthEntryPointJwt unauthorizedHandler;
+
+	@Autowired
+	private CorsFilter corsFilter;
+	
+	@Autowired 
+	private AuthTokenFilter authTokenFilter;
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-    		.authorizeRequests()
-    		.antMatchers(HttpMethod.POST,"/api/login").permitAll()    		
-    		.antMatchers(HttpMethod.GET,"/api/**").permitAll()
-        	.antMatchers(HttpMethod.POST,"/api/**").permitAll()
-        	.anyRequest()
-        	.authenticated()
-        	.and().formLogin().permitAll();
-        return http.build();
+		http.cors().and().csrf().disable()
+			.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class)
+        	.exceptionHandling()
+        	.authenticationEntryPoint(unauthorizedHandler)
+        	.and()
+        	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        	.and()
+        	.authorizeRequests()
+        	.antMatchers("/api/login").permitAll()
+        	.antMatchers("/api/empregado/**").hasAuthority("ADMIN")
+        	.anyRequest().authenticated();
+		
+		http.authenticationProvider(authenticationProvider());
+	    
+		return http.build();
 
 	}
-	/*
-	 * */
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(passwordEncoder());
+
+		return authProvider;
+	}
+
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfiguration) throws Exception {
+	    return authConfiguration.getAuthenticationManager();
+	}
+	
+//	@Bean
+//	public WebSecurityCustomizer webSecurityCustomizer() {
+//		return (web) -> web.ignoring().antMatchers("/js/**", "/images/**");
+//	}
 }

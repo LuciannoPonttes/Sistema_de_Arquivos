@@ -3,9 +3,9 @@ package com.atos.inventario.enums;
 public enum UnidadeProdutoraEnum {
 	
 	SEDE ("SEDE","SEDE"),
-	BSBA ("BSBA","Aeroporto de Bsb"),
+	BSBA ("BSBA","Aeroporto de Brasilia"),
 	CONG ("CONG","Aeroporto de Congonhas"),
-	MANU ("MANU","Aeroporto de Bsb");
+	MANU ("MANU","Aeroporto de Manaus");
 	
 	private String codigo;
 	private String unidadeProdutora;
